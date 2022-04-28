@@ -1,12 +1,11 @@
-import "./Main.css";
 import React from 'react';
 
-const Main = () => {
+const MyItems = () => {
     return (
         <div>
-            
+            <h1>My Items</h1>
         </div>
     );
 };
 
-export default Main;
+export default MyItems;
