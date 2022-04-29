@@ -10,6 +10,7 @@ import AddItems from '../AddItems/AddItems';
 import Blogs from '../Blogs/Blogs';
 import Login from '../Login/Login';
 import SignUp from '../SignUp/SignUp';
+import NotFound from '../NotFound/NotFound';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/blogs" element={<Blogs />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/sign-up" element={<SignUp />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer></Footer>
     </div>
