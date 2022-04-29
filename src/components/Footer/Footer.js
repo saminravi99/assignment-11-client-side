@@ -1,5 +1,7 @@
 import "./Footer.css";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faMessage, faPhone, faLocationDot, faBriefcase, faAward  } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
     const date = new Date();
@@ -9,7 +11,7 @@ const Footer = () => {
       <footer className="footer-bg">
         <div className="container py-5">
           <div className="row py-4">
-            <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
+            <div className="col-lg-4 col-12  mb-4 mb-lg-0">
               <img src="img/logo.png" alt="" width="180" className="mb-3" />
               <p className="font-italic text-muted">
                 A library for your books, that lets you keep everything in one
@@ -18,32 +20,41 @@ const Footer = () => {
               <ul className="list-inline mt-4">
                 <li className="list-inline-item">
                   <a href="." target="_blank" title="twitter">
-                    <i className="fa fa-twitter"></i>
+                    <FontAwesomeIcon
+                      className="footer-icons"
+                      icon={faMessage}
+                    />
                   </a>
                 </li>
                 <li className="list-inline-item">
                   <a href="." target="_blank" title="facebook">
-                    <i className="fa fa-facebook"></i>
+                    <FontAwesomeIcon className="footer-icons" icon={faPhone} />
                   </a>
                 </li>
                 <li className="list-inline-item">
                   <a href="." target="_blank" title="instagram">
-                    <i className="fa fa-instagram"></i>
+                    <FontAwesomeIcon
+                      className="footer-icons"
+                      icon={faLocationDot}
+                    />
                   </a>
                 </li>
                 <li className="list-inline-item">
                   <a href="." target="_blank" title="pinterest">
-                    <i className="fa fa-pinterest"></i>
+                    <FontAwesomeIcon
+                      className="footer-icons"
+                      icon={faBriefcase}
+                    />
                   </a>
                 </li>
                 <li className="list-inline-item">
                   <a href="." target="_blank" title="vimeo">
-                    <i className="fa fa-vimeo"></i>
+                    <FontAwesomeIcon className="footer-icons" icon={faAward} />
                   </a>
                 </li>
               </ul>
             </div>
-            <div className="col-lg-2 col-md-6 mb-4 mb-lg-0">
+            <div className="col-lg-2 col-6 mb-4 mb-lg-0">
               <h6 className="text-uppercase font-weight-bold mb-4">Store</h6>
               <ul className="list-unstyled mb-0">
                 <li className="mb-2">
@@ -68,7 +79,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-lg-2 col-md-6 mb-4 mb-lg-0">
+            <div className="col-lg-2 col-6 mb-4 mb-lg-0">
               <h6 className="text-uppercase font-weight-bold mb-4">Company</h6>
               <ul className="list-unstyled mb-0">
                 <li className="mb-2">
@@ -86,7 +97,6 @@ const Footer = () => {
                     Wishlist
                   </a>
                 </li>
-                
               </ul>
             </div>
             <div className="col-lg-4 col-md-6 mb-lg-0">

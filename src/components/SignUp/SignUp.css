@@ -5,10 +5,11 @@
 
 .form-container h1{
     font-weight: 700;
+
 }
 
 .sign-up-container{
-    width: 50%;
+    width: 50% !important;
 }
 
 @media screen and (max-width: 768px){

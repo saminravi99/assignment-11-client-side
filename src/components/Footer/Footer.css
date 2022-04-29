@@ -24,3 +24,9 @@ i {
 li > a {
     font-family: "DM Sans";
 }
+
+.footer-icons{
+    margin: 0px 10px;
+    color: #193766;
+    font-size: 1.2rem;
+}

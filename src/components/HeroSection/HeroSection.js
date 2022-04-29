@@ -4,10 +4,10 @@ import heroImg from "../../img/heroImg.png";
 
 const HeroSection = () => {
     return (
-      <div className="container d-flex justify-content-center align-items-center ">
+      <div className="container d-flex flex-lg-row flex-column-reverse justify-content-center align-items-center ">
         <div>
           <h1 className="hero-header">
-            Lets You Manage Your{" "}
+            Lets You Manage Your
             <span className="text-primary">Book Store Simply</span> Like Never
             Before
           </h1>
@@ -18,8 +18,8 @@ const HeroSection = () => {
             in one simple package!
           </p>
         </div>
-        <div className="mt-4">
-          <img src={heroImg} alt="heroimg" />
+        <div className="mt-4 ">
+          <img className="hero-image" src={heroImg} alt="heroimg" />
         </div>
       </div>
     );

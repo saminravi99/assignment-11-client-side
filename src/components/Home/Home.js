@@ -9,7 +9,8 @@ const Home = () => {
 
   const eachBook = slicedBooks.map((book) => {
     return (
-      <div className="col-4" key={book._id}>
+      <div className="col-12 col-lg-4" key={book._id}>
+        
         <div className="card my-3">
           <div className="mx-auto">
             <img className="book-img" src={book.image} alt={book.bookName} />
@@ -21,7 +22,8 @@ const Home = () => {
               <p className="card-text book-price ">Price : $ {book.price}</p>
             </div>
             <p className="card-text card-description ">
-              <span className="description"> Description:</span> {book.description.slice(0, 100)}...
+              <span className="description"> Description:</span>{" "}
+              {book.description.slice(0, 100)}...
             </p>
             <h6 className="card-text">Available Pieces: {book.quantity}</h6>
             <div>
@@ -36,8 +38,10 @@ const Home = () => {
   });
 
   return (
-    <div className="my-5">
-      <h1 className=" text-center text-muted text-capitalize ">Catalogue</h1>
+    <div className="my-lg-5 home-container">
+      <h1 className=" text-center text-muted text-capitalize mt-5 ">
+        Catalogue
+      </h1>
       <div className="row container mx-auto">{eachBook}</div>
       <div>
         <button className="btn btn-primary d-block mx-auto px-5 py-2 my-4">

@@ -7,3 +7,21 @@
   font-family: "DM Sans";
   line-height: 2;
 }
+
+@media screen and (max-width: 576px) {
+  .hero-header{
+    font-size: 1.2rem;
+    color: black;
+    text-align: center;
+  }
+  .hero-details{
+    font-size: 1rem;
+    color: black;
+    text-align: center;
+  }
+  .hero-image{
+    width: 400px;
+  }
+  
+}
+    

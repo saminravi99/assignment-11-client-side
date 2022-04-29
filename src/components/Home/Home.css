@@ -30,3 +30,9 @@
     border: 1px solid #a7c0e9;
     background-color: azure;
 }
+
+@media screen and (max-width: 768px) {
+    .home-container {
+      margin-top: 280px !important;
+    }
+}

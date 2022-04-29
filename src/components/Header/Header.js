@@ -57,7 +57,7 @@ const Header = () => {
         }
       >
         <div className="pt-4 navbar-container">
-          <Navbar collapseOnSelect expand="lg">
+          <Navbar className="navbar-bg" collapseOnSelect expand="lg">
             <Container>
               <Link to="/">
                 <div className="logo-img-container">
@@ -178,6 +178,7 @@ const Header = () => {
           <img src={headerImg} alt="img" />
         </div>
       </div>
+      
     </div>
   );
 };
