@@ -42,10 +42,8 @@ const Inventory = () => {
                 Update Stock
               </button>
               <div className="d-flex justify-content-center">
-                <button className="btn btn-success d-block me-3  px-4 my-4">
-                  Delivered
-                </button>
-                <button className="btn btn-danger d-block px-4  py-2 my-4">
+               
+                <button className="btn btn-danger d-block px-5  py-2 my-4">
                   Delete
                 </button>
               </div>

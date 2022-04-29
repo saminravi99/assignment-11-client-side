@@ -42,7 +42,16 @@ const Update = () => {
     });
   }
 
-  // Using FUnction to Return to Previous Page
+  const handleDeliver = () => {
+    if(updateStock.quantity > 0){
+      setUpdateStock({
+        ...updateStock,
+        quantity: updateStock.quantity - 1,
+      });
+    }
+  }
+
+  // Using Function to Return to Previous Page
   const handleGoBack = () => {
     navigate("/inventory");
   };
@@ -80,6 +89,11 @@ const Update = () => {
                 Available Pieces: {chosenBook?.quantity}
               </h6>
             </div>
+          </div>
+          <div>
+            <button onClick={handleDeliver} className="btn btn-success d-block mx-auto  px-5 my-4">
+              Deliver
+            </button>
           </div>
         </div>
         <div className="update-stock-form mt-lg-0 mt-5">
