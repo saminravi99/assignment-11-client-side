@@ -12,12 +12,15 @@ const Home = () => {
 
   const handleInventory = () => {
     navigate("/inventory");
-  }
+  };
+
+  const handleUpdateStock = (id) => {
+    navigate(`/inventory/${id}`);
+  };
 
   const eachBook = slicedBooks.map((book) => {
     return (
       <div className="col-12 col-lg-4" key={book._id}>
-        
         <div className="card my-3">
           <div className="mx-auto">
             <img className="book-img" src={book.image} alt={book.bookName} />
@@ -34,7 +37,10 @@ const Home = () => {
             </p>
             <h6 className="card-text">Available Pieces: {book.quantity}</h6>
             <div>
-              <button className="btn btn-primary d-block mx-auto px-5 py-2 mt-4">
+              <button
+                onClick={() => handleUpdateStock(book._id)}
+                className="btn btn-primary d-block mx-auto px-5 py-2 mt-4"
+              >
                 Update Stock
               </button>
             </div>
@@ -51,7 +57,10 @@ const Home = () => {
       </h1>
       <div className="row container mx-auto">{eachBook}</div>
       <div>
-        <button onClick={handleInventory} className="btn btn-primary d-block mx-auto px-5 py-2 my-4">
+        <button
+          onClick={handleInventory}
+          className="btn btn-primary d-block mx-auto px-5 py-2 my-4"
+        >
           Manage All Books
         </button>
       </div>

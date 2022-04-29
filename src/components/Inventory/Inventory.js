@@ -18,8 +18,8 @@ const Inventory = () => {
 
   const book = books.map((book) => {
     return (
-      <div className="col-12 col-lg-4" key={book._id}>
-        <div className="card my-3">
+      <div className="col-12 col-lg-4 my-3" key={book._id}>
+        <div className="card my-3  inventory-card">
           <div className="mx-auto">
             <img className="book-img" src={book.image} alt={book.bookName} />
           </div>
@@ -34,10 +34,21 @@ const Inventory = () => {
               {book.description.slice(0, 100)}...
             </p>
             <h6 className="card-text">Available Pieces: {book.quantity}</h6>
-            <div>
-              <button onClick={() => handleUpdateStock(book._id)} className="btn btn-primary d-block mx-auto px-5 py-2 mt-4">
+            <div className="">
+              <button
+                onClick={() => handleUpdateStock(book._id)}
+                className="btn btn-primary d-block mx-auto px-5 py-2 mt-4"
+              >
                 Update Stock
               </button>
+              <div className="d-flex justify-content-center">
+                <button className="btn btn-success d-block me-3  px-4 my-4">
+                  Delivered
+                </button>
+                <button className="btn btn-danger d-block px-4  py-2 my-4">
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -52,6 +63,7 @@ const Inventory = () => {
         <button onClick={handleAddNewItem} className="btn btn-primary d-block mx-auto px-5 py-2 my-4">
             Add New Item
         </button>
+        
       </div>
     </div>
   );
