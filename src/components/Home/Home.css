@@ -1,0 +1,23 @@
+.book-img{
+    width: 250px;
+    height: 300px;
+    padding: 10px;
+}
+
+
+
+.card-body {
+    padding: 10px;
+    height: 320px;
+
+}
+
+.card-text {
+    /* font-size: 14px; */
+    font-family: "DM Sans", sans-serif;
+    line-height: 1.5;
+}
+
+.description{
+    font-weight: 700;
+}
