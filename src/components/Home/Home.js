@@ -1,11 +1,18 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AllContext } from "../App/App";
 import "./Home.css";
 
 const Home = () => {
   const { books } = useContext(AllContext);
 
+  const navigate = useNavigate();
+
   const slicedBooks = books.slice(0, 6);
+
+  const handleInventory = () => {
+    navigate("/inventory");
+  }
 
   const eachBook = slicedBooks.map((book) => {
     return (
@@ -44,7 +51,7 @@ const Home = () => {
       </h1>
       <div className="row container mx-auto">{eachBook}</div>
       <div>
-        <button className="btn btn-primary d-block mx-auto px-5 py-2 my-4">
+        <button onClick={handleInventory} className="btn btn-primary d-block mx-auto px-5 py-2 my-4">
           Manage All Books
         </button>
       </div>

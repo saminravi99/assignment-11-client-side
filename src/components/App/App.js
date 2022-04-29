@@ -14,6 +14,7 @@ import NotFound from '../NotFound/NotFound';
 import useBooks from '../../components/hooks/useBooks';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import { Toaster } from 'react-hot-toast';
+import Update from '../Update/Update';
 
 export const AllContext = createContext();
 
@@ -55,6 +56,14 @@ console.log(books);
             element={
               <RequireAuth>
                 <AddItems />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/inventory/:id"
+            element={
+              <RequireAuth>
+                <Update></Update>
               </RequireAuth>
             }
           ></Route>

@@ -1,0 +1,27 @@
+.back-btn{
+    font-size: 40px;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.card-container{
+    border: none !important;
+}
+
+.update-stock-info{
+    width: 50%;
+}
+
+.update-stock-form{
+    width: 50%
+}
+
+@media screen and (max-width: 768px) {
+    .update-stock-info{
+        width: 100%
+    }
+    .update-stock-form{
+        width: 100%
+    }
+}
+    
