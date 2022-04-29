@@ -16,9 +16,9 @@ const Home = () => {
           </div>
           <div className="card-body">
             <h5 className="card-title text-center">{book.bookName}</h5>
-            <div className="d-flex justify-content-center align-items-center my-3">
+            <div className="d-flex justify-content-even align-items-center my-3">
               <h6 className="card-text mb-0 mx-3">Author: {book.author}</h6>
-              <p className="card-text ">Price : $ {book.price}</p>
+              <p className="card-text book-price ">Price : $ {book.price}</p>
             </div>
             <p className="card-text card-description ">
               <span className="description"> Description:</span> {book.description.slice(0, 100)}...

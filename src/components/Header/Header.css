@@ -108,3 +108,16 @@
   color: #fff;
 }
 
+.user-name{
+  font-family: "DM Sans";
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+}
+
+.sign-out-btn{
+  background-color: #193766 !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-family: "DM Sans";
+  
+}

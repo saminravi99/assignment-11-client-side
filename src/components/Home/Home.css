@@ -21,3 +21,12 @@
 .description{
     font-weight: 700;
 }
+
+.book-price{
+    font-weight: 700;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 25px;
+    border: 1px solid #a7c0e9;
+    background-color: azure;
+}

@@ -2,26 +2,43 @@ import "./Header.css";
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import { Container, Nav } from "react-bootstrap";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../img/logoBookImg.PNG";
 import HeroSection from "../HeroSection/HeroSection";
 import headerImg from "../../img/img6.png";
+import useAuth from "../hooks/useAuth";
+import { signOut } from "firebase/auth";
+import auth from "../firebase.init";
 
 const Header = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  let from = navigate?.state?.from?.pathname || "/login";
+
+  const [authUser] = useAuth();
+
+  console.log(authUser);
+
+  //Using Function to Sign Out Using Firebase Hooks
+  const handleSignOut = () => {
+    signOut(auth);
+    navigate(from);
+  };
 
   return (
-    <div className={
-      pathname === "/" || 
-      pathname === "/login" || 
-      pathname === "/sign-up" || 
-      pathname === "/blogs" ||
-      pathname === "/my-items" ||
-      pathname === "/add-items" ||
-      pathname === "/inventory"
-      ? `d-block`
-      : `d-none`
-    }>
+    <div
+      className={
+        pathname === "/" ||
+        pathname === "/login" ||
+        pathname === "/sign-up" ||
+        pathname === "/blogs" ||
+        pathname === "/my-items" ||
+        pathname === "/add-items" ||
+        pathname === "/inventory"
+          ? `d-block`
+          : `d-none`
+      }
+    >
       <div
         className={
           pathname.includes("login")
@@ -66,22 +83,30 @@ const Header = () => {
                   >
                     Inventory
                   </NavLink>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive ? `active-link mx-3` : `inactive-link mx-3`
-                    }
-                    to="/my-items"
-                  >
-                    My Items
-                  </NavLink>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive ? `active-link mx-3` : `inactive-link mx-3`
-                    }
-                    to="/add-items"
-                  >
-                    Add Items
-                  </NavLink>
+                  <span>
+                    {authUser && (
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive ? `active-link mx-3` : `inactive-link mx-3`
+                        }
+                        to="/my-items"
+                      >
+                        My Items
+                      </NavLink>
+                    )}
+                  </span>
+                  <span>
+                    {authUser && (
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive ? `active-link mx-3` : `inactive-link mx-3`
+                        }
+                        to="/add-items"
+                      >
+                        Add Items
+                      </NavLink>
+                    )}
+                  </span>
                   <NavLink
                     className={({ isActive }) =>
                       isActive ? `active-link mx-3` : `inactive-link mx-3`
@@ -92,9 +117,23 @@ const Header = () => {
                   </NavLink>
                 </Nav>
                 <Nav>
-                  <NavLink className="mx-3 login-btn" to="/login">
-                    Login
-                  </NavLink>
+                  {authUser ? (
+                    <span>
+                      <span className="px-4 user-name">
+                        Hello, {authUser.displayName}
+                      </span>
+                      <button
+                        className="btn sign-out-btn"
+                        onClick={handleSignOut}
+                      >
+                        Sign Out
+                      </button>
+                    </span>
+                  ) : (
+                    <NavLink className="mx-3 login-btn" to="/login">
+                      Login
+                    </NavLink>
+                  )}
                 </Nav>
               </Navbar.Collapse>
             </Container>
