@@ -68,7 +68,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container mx-auto my-5 sign-up-container">
+    <div className="container mx-auto my-5 sign-up-container login-box">
       <Form onSubmit={handleSignUp} className="form-container">
         <h1 className="text-center text-primary">Register</h1>
         <Form.Group className="mb-3" controlId="formBasicEmail">

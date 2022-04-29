@@ -1,13 +1,34 @@
 import "./Header.css";
-import React from 'react';
+import React from "react";
 import Navbar from "react-bootstrap/Navbar";
-import { Container, Nav} from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Container, Nav } from "react-bootstrap";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../../img/logoBookImg.PNG";
+import HeroSection from "../HeroSection/HeroSection";
+import headerImg from "../../img/img6.png";
 
 const Header = () => {
-    return (
-      <div>
+  const { pathname } = useLocation();
+
+  return (
+    <div
+      className={
+        pathname.includes("login")
+          ? `header-section`
+          : pathname.includes("sign-up")
+          ? `header-section`
+          : pathname.includes("inventory")
+          ? `header-section`
+          : pathname.includes("my-items")
+          ? `header-section`
+          : pathname.includes("add-items")
+          ? `header-section`
+          : pathname.includes("blogs")
+          ? `header-section`
+          : `header-section header-section-height`
+      }
+    >
+      <div className="pt-4 navbar-container">
         <Navbar collapseOnSelect expand="lg">
           <Container>
             <Link to="/">
@@ -20,7 +41,7 @@ const Header = () => {
               <Nav className="mx-auto">
                 <NavLink
                   className={({ isActive }) =>
-                    isActive ? `active-link mx-4` : `inactive-link mx-4`
+                    isActive ? `active-link mx-3` : `inactive-link mx-3`
                   }
                   to="/"
                 >
@@ -28,7 +49,7 @@ const Header = () => {
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive ? `active-link mx-4` : `inactive-link mx-4`
+                    isActive ? `active-link mx-3` : `inactive-link mx-3`
                   }
                   to="/inventory"
                 >
@@ -36,7 +57,7 @@ const Header = () => {
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive ? `active-link mx-4` : `inactive-link mx-4`
+                    isActive ? `active-link mx-3` : `inactive-link mx-3`
                   }
                   to="/my-items"
                 >
@@ -44,7 +65,7 @@ const Header = () => {
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive ? `active-link mx-4` : `inactive-link mx-4`
+                    isActive ? `active-link mx-3` : `inactive-link mx-3`
                   }
                   to="/add-items"
                 >
@@ -52,7 +73,7 @@ const Header = () => {
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
-                    isActive ? `active-link mx-4` : `inactive-link mx-4`
+                    isActive ? `active-link mx-3` : `inactive-link mx-3`
                   }
                   to="/blogs"
                 >
@@ -60,12 +81,7 @@ const Header = () => {
                 </NavLink>
               </Nav>
               <Nav>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? `active-link mx-4` : `inactive-link mx-4`
-                  }
-                  to="/login"
-                >
+                <NavLink className="mx-3 login-btn" to="/login">
                   Login
                 </NavLink>
               </Nav>
@@ -73,7 +89,46 @@ const Header = () => {
           </Container>
         </Navbar>
       </div>
-    );
+      <div
+        className={
+          pathname.includes("login")
+            ? "d-none"
+            : pathname.includes("sign-up")
+            ? "d-none"
+            : pathname.includes("inventory")
+            ? "d-none"
+            : pathname.includes("my-items")
+            ? "d-none"
+            : pathname.includes("add-items")
+            ? "d-none"
+            : pathname.includes("blogs")
+            ? "d-none"
+            : `hero-container`
+        }
+      >
+        <HeroSection></HeroSection>
+      </div>
+      <div
+        className={
+          pathname.includes("login")
+            ? "d-none"
+            : pathname.includes("sign-up")
+            ? "d-none"
+            : pathname.includes("inventory")
+            ? `d-none`
+            : pathname.includes("my-items")
+            ? `d-none`
+            : pathname.includes("add-items")
+            ? `d-none`
+            : pathname.includes("blogs")
+            ? `d-none`
+            : `header-img`
+        }
+      >
+        <img src={headerImg} alt="img" />
+      </div>
+    </div>
+  );
 };
 
 export default Header;

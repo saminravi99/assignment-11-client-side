@@ -90,7 +90,7 @@ const Login = () => {
   }, 7000);
 
   return (
-    <div>
+    <div className="login-box">
       {signInLoading ? (
         <Loading></Loading>
       ) : (

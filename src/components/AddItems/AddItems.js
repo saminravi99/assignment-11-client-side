@@ -3,9 +3,9 @@ import "./AddItems.css"
 
 const AddItems = () => {
     return (
-        <div>
-            <h1>Add Items</h1>
-        </div>
+      <div className="padding-nav">
+        <h1>Add Items</h1>
+      </div>
     );
 };
 

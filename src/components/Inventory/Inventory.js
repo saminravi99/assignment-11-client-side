@@ -3,7 +3,7 @@ import "./Inventory.css"
 
 const Inventory = () => {
     return (
-        <div>
+        <div className="padding-nav">
             <h1>Inventory</h1>
         </div>
     );

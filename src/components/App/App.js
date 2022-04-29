@@ -14,15 +14,17 @@ import SignUp from '../SignUp/SignUp';
 function App() {
   return (
     <div>
-      <Header></Header>
+      <div>
+        <Header></Header>
+      </div>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
-        <Route path="/my-items" element={<MyItems/>}></Route>
+        <Route path="/my-items" element={<MyItems />}></Route>
         <Route path="/add-items" element={<AddItems />}></Route>
-        <Route path="/blogs" element={<Blogs/>}></Route>
+        <Route path="/blogs" element={<Blogs />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/sign-up" element={<SignUp/>}></Route>
+        <Route path="/sign-up" element={<SignUp />}></Route>
       </Routes>
       <Footer></Footer>
     </div>
