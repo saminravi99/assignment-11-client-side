@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import auth from "../firebase.init";
 import useBooks from "../hooks/useBooks";
 import "./Inventory.css";
 
 const Inventory = () => {
   const [books, setBooks] = useBooks();
+
+  const [user] = useAuthState(auth);
+  const email = user?.email;
+
+  const [userAddedBooks, setUserAddedBooks] = useState([]);
+
+  console.log(userAddedBooks);
+  const url = `https://warehouse-management-saminravi.herokuapp.com/user?email=${email}`;
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserAddedBooks(data);
+      });
+  }, [url]);
 
   const navigate = useNavigate();
 
@@ -16,7 +34,7 @@ const Inventory = () => {
     navigate(`/inventory/${id}`);
   };
 
-  const handleDeleteBook = (id) => {
+  const handleDeleteBook = (id, bookName) => {
     const proceed = window.confirm("Are you sure?");
     if (proceed) {
       const url = `https://warehouse-management-saminravi.herokuapp.com/books/${id}`;
@@ -29,7 +47,27 @@ const Inventory = () => {
           const remaining = books.filter((book) => book._id !== id);
           console.log(remaining);
           setBooks(remaining);
-        });
+        })
+        .then(() => {
+          const userAddedBook = userAddedBooks.find(
+            (book) => book.bookName === bookName
+          );
+
+          const userUrl = `https://warehouse-management-saminravi.herokuapp.com/users/${userAddedBook._id}`;
+
+          fetch(userUrl, {
+            method: "DELETE",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+             
+            });
+        }
+          
+        )
+
+      
     }
   };
 
@@ -60,7 +98,7 @@ const Inventory = () => {
               </button>
               <div className="d-flex justify-content-center">
                 <button
-                  onClick={() => handleDeleteBook(book._id)}
+                  onClick={() => handleDeleteBook(book._id, book.bookName)}
                   className="btn btn-danger d-block px-5  py-2 my-4"
                 >
                   Delete
