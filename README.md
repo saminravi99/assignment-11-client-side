@@ -12,6 +12,12 @@
 
 ---
 
+# Project Description :
+
+*This project is a MERN Stack implemented project where you can keep and manage your book store warehouse. Here you can add the stocks of the books of your warehouse along with adding new books to the store. Also you can delete and deliver books from your warehouse. Once you deliver a book it will reduce an item by one.*
+
+---
+
 # Technologies Used In This Project:
 
 - React Router : Routes Has Been Set Up With React Router.

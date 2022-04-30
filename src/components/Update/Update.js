@@ -78,8 +78,16 @@ const Update = () => {
     });
   };
 
+  const [bookQuantity, setBookQuantity] = useState(0);
+
+  console.log(bookQuantity);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (chosenBook?.quantity) {
+      setBookQuantity(e.target.quantity.value);
+    }
 
     axios
       .put(
@@ -125,18 +133,88 @@ const Update = () => {
   };
 
   const handleDeliver = () => {
-    if (updateStock.quantity > 0) {
+    if (chosenBook.quantity > 0) {
+      if (bookQuantity > 0) {
+        setBookQuantity(bookQuantity - 1);
+        chosenBook.quantity = bookQuantity - 1;
+      } else {
+        chosenBook.quantity = chosenBook.quantity - 1;
+      }
+
       setUpdateStock({
-        ...updateStock,
-        quantity: updateStock.quantity - 1,
+        bookName: chosenBook?.bookName,
+        author: chosenBook?.author,
+        price: chosenBook?.price,
+        description: chosenBook?.description,
+        image: chosenBook?.image,
+        quantity: chosenBook.quantity,
       });
     }
+    //https://warehouse-management-saminravi.herokuapp.com/inventory/${chosenBook._id}
+    //(http://localhost:5000/inventory/${chosenBook._id})
+    //(http://localhost:5000/users/${requiredBook._id})
+    //https://warehouse-management-saminravi.herokuapp.com/users/${requiredBook._id}
+    axios
+      .put(
+        `https://warehouse-management-saminravi.herokuapp.com/inventory/${chosenBook._id}`,
+        {
+          bookName: chosenBook?.bookName,
+          author: chosenBook?.author,
+          price: chosenBook?.price,
+          description: chosenBook?.description,
+          image: chosenBook?.image,
+          quantity: chosenBook.quantity,
+        }
+      )
+      .then((response) => {
+        const { data } = response;
+        console.log(data);
+        if (data.matchedCount) {
+          toast.success("Book Delivered Successfully");
+        }
+      })
+      .then(() => {
+        const requiredBook = userBook.find(
+          (book) => book.bookName === chosenBook.bookName
+        );
+        axios
+          .put(
+            `https://warehouse-management-saminravi.herokuapp.com/users/${requiredBook._id}`,
+            {
+              user: authUser.displayName,
+              email: authUser.email,
+              bookName: chosenBook?.bookName,
+              author: chosenBook?.author,
+              price: chosenBook?.price,
+              description: chosenBook?.description,
+              image: chosenBook?.image,
+              quantity: chosenBook.quantity,
+            }
+          )
+          .then((response) => {
+            const { data } = response;
+            if (data.matchedCount) {
+              console.log("User Updated Successfully");
+            }
+          });
+      });
   };
+
+  console.log(chosenBook);
+
+  useEffect(() => {
+    console.log(chosenBook?.quantity);
+  }, [chosenBook?.quantity]);
 
   // Using Function to Return to Previous Page
   const handleGoBack = () => {
     navigate("/inventory");
   };
+
+  useEffect(() => {
+    console.log(updateStock);
+  }, [updateStock, chosenBook?.quantity]);
+
   return (
     <div>
       <div className="back-btn" onClick={handleGoBack}>
@@ -168,14 +246,15 @@ const Update = () => {
                 {chosenBook?.description.slice(0, 500)}...
               </p>
               <h6 className="card-text">
-                Available Pieces: {chosenBook?.quantity}
+                Available Pieces:{" "}
+                {bookQuantity ? bookQuantity : chosenBook?.quantity}
               </h6>
             </div>
           </div>
           <div>
             <button
               onClick={handleDeliver}
-              className="btn btn-success d-block mx-auto  px-5 my-4"
+              className="btn btn-success d-block mx-auto  px-5"
             >
               Deliver
             </button>
