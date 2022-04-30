@@ -34,7 +34,8 @@ const Header = () => {
         pathname === "/blogs" ||
         pathname === "/my-items" ||
         pathname === "/add-items" ||
-        pathname === "/inventory"
+        pathname === "/inventory" ||
+        pathname === "/about-us" 
           ? `d-block`
           : `d-none`
       }
@@ -53,6 +54,8 @@ const Header = () => {
             ? `header-section`
             : pathname.includes("blogs")
             ? `header-section`
+            : pathname.includes("about-us")
+            ? `header-section`
             : `header-section header-section-height`
         }
       >
@@ -69,7 +72,7 @@ const Header = () => {
                 <Nav className="mx-auto">
                   <NavLink
                     className={({ isActive }) =>
-                      isActive ? `active-link mx-3` : `inactive-link mx-3`
+                      isActive ? `active-link mx-2` : `inactive-link mx-2`
                     }
                     to="/"
                   >
@@ -77,7 +80,7 @@ const Header = () => {
                   </NavLink>
                   <NavLink
                     className={({ isActive }) =>
-                      isActive ? `active-link mx-3` : `inactive-link mx-3`
+                      isActive ? `active-link mx-2` : `inactive-link mx-2`
                     }
                     to="/inventory"
                   >
@@ -87,7 +90,7 @@ const Header = () => {
                     {authUser && (
                       <NavLink
                         className={({ isActive }) =>
-                          isActive ? `active-link mx-3` : `inactive-link mx-3`
+                          isActive ? `active-link mx-2` : `inactive-link mx-2`
                         }
                         to="/my-items"
                       >
@@ -99,7 +102,7 @@ const Header = () => {
                     {authUser && (
                       <NavLink
                         className={({ isActive }) =>
-                          isActive ? `active-link mx-3` : `inactive-link mx-3`
+                          isActive ? `active-link mx-2` : `inactive-link mx-2`
                         }
                         to="/add-items"
                       >
@@ -109,11 +112,19 @@ const Header = () => {
                   </span>
                   <NavLink
                     className={({ isActive }) =>
-                      isActive ? `active-link mx-3` : `inactive-link mx-3`
+                      isActive ? `active-link mx-2` : `inactive-link mx-2`
                     }
                     to="/blogs"
                   >
                     Blogs
+                  </NavLink>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? `active-link mx-2` : `inactive-link mx-2`
+                    }
+                    to="/about-us"
+                  >
+                    About Us
                   </NavLink>
                 </Nav>
                 <Nav>
@@ -130,7 +141,7 @@ const Header = () => {
                       </button>
                     </span>
                   ) : (
-                    <NavLink className="mx-3 login-btn" to="/login">
+                    <NavLink className="mx-2 login-btn" to="/login">
                       Login
                     </NavLink>
                   )}
@@ -153,6 +164,8 @@ const Header = () => {
               ? "d-none"
               : pathname.includes("blogs")
               ? "d-none"
+              : pathname.includes("about-us")
+              ? "d-none"
               : `hero-container`
           }
         >
@@ -171,6 +184,8 @@ const Header = () => {
               : pathname.includes("add-items")
               ? `d-none`
               : pathname.includes("blogs")
+              ? `d-none`
+              : pathname.includes("about-us")
               ? `d-none`
               : `header-img`
           }

@@ -15,6 +15,7 @@ import useBooks from '../../components/hooks/useBooks';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import { Toaster } from 'react-hot-toast';
 import Update from '../Update/Update';
+import AboutUs from '../AboutUs/AboutUs';
 
 export const AllContext = createContext();
 
@@ -70,6 +71,7 @@ console.log(books);
           <Route path="/blogs" element={<Blogs />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/sign-up" element={<SignUp />}></Route>
+          <Route path="/about-us" element={<AboutUs></AboutUs>}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
         <Footer></Footer>

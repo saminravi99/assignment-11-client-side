@@ -231,7 +231,7 @@ const Update = () => {
                 alt={chosenBook?.bookName}
               />
             </div>
-            <div className="card-body">
+            <div className="card-body-update">
               <h3 className="card-title text-center">{chosenBook?.bookName}</h3>
               <div className="d-flex justify-content-around align-items-center my-3">
                 <h6 className="card-text mb-0 mx-3">
