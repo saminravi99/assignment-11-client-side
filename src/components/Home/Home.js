@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AllContext } from "../App/App";
 import "./Home.css";
+import second from "../../img/second.png"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleDot } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   const { books } = useContext(AllContext);
@@ -63,6 +66,48 @@ const Home = () => {
         >
           Manage All Books
         </button>
+      </div>
+
+      <div className="d-flex flex-column-reverse flex-lg-row align-items-center second-section">
+        <div className="container ms-lg-5  second-section-left">
+          <h2 className="second-section-headline my-lg-3 mb-3 text-center text-lg-start ">
+            There are 800+ Books Ready to Manage and Store
+          </h2>
+          <p className="second-section-paragraph mb-3 text-center text-lg-start">
+            Many design choices make it free for you to make a different design
+            every time you post. There are 80+ designs with 10+ different
+            layouts. Each layout has several designs with the same theme, just
+            need to focus on the content!
+          </p>
+
+          <h6 className="my-4 bullets">
+            <span className="text-primary pe-2">
+              <FontAwesomeIcon className="bullet-icons" icon={faCircleDot} />{" "}
+              Promotions:
+            </span>
+            get more potential customers by making product or service promotions
+            in a more attractive way.
+          </h6>
+          <h6 className="my-4 bullets">
+            <span className="text-primary pe-2">
+              <FontAwesomeIcon className="bullet-icons" icon={faCircleDot} />{" "}
+              Insights:
+            </span>
+            create content that contains insights on design, coding, or
+            recommendations for the best tourist attractions.
+          </h6>
+          <h6 className="my-4 bullets">
+            <span className="text-primary pe-2">
+              <FontAwesomeIcon className="bullet-icons" icon={faCircleDot} />{" "}
+              Much More:
+            </span>
+            design more types of content with Social Feeds and increase
+            followers on your social media accounts.
+          </h6>
+        </div>
+        <div className="second-section-right">
+          <img className="img-right" src={second} alt="second" />
+        </div>
       </div>
     </div>
   );

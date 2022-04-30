@@ -31,6 +31,30 @@
     background-color: azure;
 }
 
+.second-section-left{
+    font-family: "DM Sans";
+}
+
+.second-section-headline{
+    color:#193766;
+
+}
+
+.second-section-paragraph {
+    color: #697B98;
+    /* width: 500px; */
+
+}
+
+
+
+.img-right{
+    width: 800px;
+    height: 800px;
+    padding: 10px;
+}
+
+
 @media screen and (max-width: 768px) {
     .home-container {
       margin-top: 280px !important;
