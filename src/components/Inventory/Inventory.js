@@ -1,20 +1,37 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { AllContext } from "../App/App";
+import useBooks from "../hooks/useBooks";
 import "./Inventory.css";
 
 const Inventory = () => {
-  const { books } = useContext(AllContext);
+  const [books, setBooks] = useBooks();
 
   const navigate = useNavigate();
 
   const handleAddNewItem = () => {
     navigate("/add-items");
-  }
+  };
 
   const handleUpdateStock = (id) => {
     navigate(`/inventory/${id}`);
-  }
+  };
+
+  const handleDeleteBook = (id) => {
+    const proceed = window.confirm("Are you sure?");
+    if (proceed) {
+      const url = `https://warehouse-management-saminravi.herokuapp.com/books/${id}`;
+      fetch(url, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          const remaining = books.filter((book) => book._id !== id);
+          console.log(remaining);
+          setBooks(remaining);
+        });
+    }
+  };
 
   const book = books.map((book) => {
     return (
@@ -42,8 +59,10 @@ const Inventory = () => {
                 Update Stock
               </button>
               <div className="d-flex justify-content-center">
-               
-                <button className="btn btn-danger d-block px-5  py-2 my-4">
+                <button
+                  onClick={() => handleDeleteBook(book._id)}
+                  className="btn btn-danger d-block px-5  py-2 my-4"
+                >
                   Delete
                 </button>
               </div>
@@ -58,10 +77,12 @@ const Inventory = () => {
     <div className="padding-nav">
       <div className="row container mx-auto">{book}</div>
       <div>
-        <button onClick={handleAddNewItem} className="btn btn-primary d-block mx-auto px-5 py-2 my-4">
-            Add New Item
+        <button
+          onClick={handleAddNewItem}
+          className="btn btn-primary d-block mx-auto px-5 py-2 my-4"
+        >
+          Add New Item
         </button>
-        
       </div>
     </div>
   );
