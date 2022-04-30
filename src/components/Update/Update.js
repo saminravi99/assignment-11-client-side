@@ -1,8 +1,10 @@
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { AllContext } from "../App/App";
 import auth from "../firebase.init";
@@ -22,34 +24,114 @@ const Update = () => {
   //Using Array Find Method For Dynamic Checkout Route
   const chosenBook = books?.find((book) => book?._id === params?.id);
 
+  console.log(chosenBook);
+
+  const [userBook, setUserBook] = useState([]);
+
+  console.log(userBook);
+
+  useEffect(() => {
+    fetch(
+      `https://warehouse-management-saminravi.herokuapp.com/user?email=${authUser?.email}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setUserBook(data);
+      });
+  }, [authUser?.email]);
+
   const [updateStock, setUpdateStock] = useState({
-    _id: `${chosenBook?._id}`,
-    bookName: `${chosenBook?.bookName}`,
-    author: `${chosenBook?.author}`,
-    price: `${chosenBook?.price}`,
-    quantity: `${chosenBook?.quantity}`,
-    description: `${chosenBook?.description}`,
-    image: `${chosenBook?.image}`,
+    _id: "",
+    bookName: "",
+    author: "",
+    price: "",
+    quantity: "",
+    description: "",
+    image: "",
   });
+
+  const [stockUpdateUser, setStockUpdateUser] = useState({});
+
+  console.log(stockUpdateUser);
 
   console.log(updateStock);
 
+  const handleStockChange = (e) => {
+    setUpdateStock({
+      bookName: chosenBook?.bookName,
+      author: chosenBook?.author,
+      price: chosenBook?.price,
+      description: chosenBook?.description,
+      image: chosenBook?.image,
+      [e.target.name]: e.target.value,
+    });
+
+    setStockUpdateUser({
+      bookName: chosenBook?.bookName,
+      author: chosenBook?.author,
+      price: chosenBook?.price,
+      description: chosenBook?.description,
+      image: chosenBook?.image,
+      [e.target.name]: e.target.value,
+      user: authUser.displayName,
+      email: authUser.email,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUpdateStock({
-      ...updateStock,
-      quantity: e.target.quantity.value,
-    });
-  }
+
+    axios
+      .put(
+        `https://warehouse-management-saminravi.herokuapp.com/inventory/${chosenBook._id}`,
+        updateStock
+      )
+      .then((response) => {
+        const { data } = response;
+        if (data.insertedId) {
+          toast.success("Book Updated Successfully");
+        }
+        axios
+          .post(
+            `https://warehouse-management-saminravi.herokuapp.com/userStockUpdate`,
+            stockUpdateUser
+          )
+          .then((response) => {
+            const { data } = response;
+            if (data.insertedId) {
+              console.log("User Added Successfully");
+            }
+          })
+          .then(() => {
+            const requiredBook = userBook.find(
+              (book) => book.bookName === chosenBook.bookName
+            );
+            axios
+              .put(
+                `https://warehouse-management-saminravi.herokuapp.com/users/${requiredBook._id}`,
+                stockUpdateUser
+              )
+              .then((response) => {
+                const { data } = response;
+                if (data.insertedId) {
+                  console.log("User Updated Successfully");
+                }
+              });
+          });
+
+        // e.target.reset();
+        toast.success("Book Added Successfully");
+      });
+  };
 
   const handleDeliver = () => {
-    if(updateStock.quantity > 0){
+    if (updateStock.quantity > 0) {
       setUpdateStock({
         ...updateStock,
         quantity: updateStock.quantity - 1,
       });
     }
-  }
+  };
 
   // Using Function to Return to Previous Page
   const handleGoBack = () => {
@@ -91,7 +173,10 @@ const Update = () => {
             </div>
           </div>
           <div>
-            <button onClick={handleDeliver} className="btn btn-success d-block mx-auto  px-5 my-4">
+            <button
+              onClick={handleDeliver}
+              className="btn btn-success d-block mx-auto  px-5 my-4"
+            >
               Deliver
             </button>
           </div>
@@ -143,6 +228,7 @@ const Update = () => {
                 Remaining Stock
               </Form.Label>
               <Form.Control
+                onChange={handleStockChange}
                 type="number"
                 name="quantity"
                 placeholder="Number of Stock"
