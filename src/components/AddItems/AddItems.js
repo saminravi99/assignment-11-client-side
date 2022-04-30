@@ -1,6 +1,8 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 import auth from "../firebase.init";
 import "./AddItems.css";
 
@@ -20,38 +22,55 @@ const AddItems = () => {
     email: authUser.email,
     bookName: "",
     author: "",
-    price: "",
-    quantity: "",
+    price: 0,
+    quantity: 0,
     description: "",
     image: "",
   });
   console.log(addBook);
+  const handleAddBook = (e) => {
+    setAddBook({
+      ...addBook,
+      [e.target.name]: e.target.value,
+    });
+    setUserInfo({
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  console.log(addBook);
+  console.log(userInfo);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setAddBook({
-      ...addBook,
-      bookName: e.target.bookName.value,
-      author: e.target.author.value,
-      price: e.target.price.value,
-      quantity: e.target.quantity.value,
-      description: e.target.description.value,
-      image: e.target.image.value,
-    });
+    
 
-    setUserInfo({
-      ...userInfo,
-      bookName: e.target.bookName.value,
-      author: e.target.author.value,
-      price: e.target.price.value,
-      quantity: e.target.quantity.value,
-      description: e.target.description.value,
-      image: e.target.image.value,
-    });
-
+    axios
+      .post(
+        "https://warehouse-management-saminravi.herokuapp.com/book",
+        addBook
+      )
+      .then((response) => {
+        const { data } = response;
+        if (data.insertedId) {
+          toast.success("Book Added Successfully");
+        }
+      });
+    axios
+      .post(
+        "https://warehouse-management-saminravi.herokuapp.com/user",
+        userInfo
+      )
+      .then((response) => {
+        const { data } = response;
+        if (data.insertedId) {
+          console.log("User Added Successfully");
+        }
+      });
     e.target.reset();
+    toast.success("Book Added Successfully");
   };
-
 
   return (
     <div className="padding-nav">
@@ -86,8 +105,11 @@ const AddItems = () => {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label className="checkout-labels">Book Cover Image</Form.Label>
+            <Form.Label className="checkout-labels">
+              Book Cover Image
+            </Form.Label>
             <Form.Control
+              onChange={handleAddBook}
               type="text"
               placeholder="Image URL of the Book"
               required
@@ -97,6 +119,7 @@ const AddItems = () => {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="checkout-labels">Book Name</Form.Label>
             <Form.Control
+              onChange={handleAddBook}
               type="text"
               placeholder="Name Of Your Book"
               required
@@ -107,6 +130,7 @@ const AddItems = () => {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="checkout-labels">Name of Author</Form.Label>
             <Form.Control
+              onChange={handleAddBook}
               type="text"
               name="author"
               placeholder="Book Author Name"
@@ -118,6 +142,7 @@ const AddItems = () => {
             <Form.Label className="checkout-labels">Description</Form.Label>
 
             <Form.Control
+              onChange={handleAddBook}
               as="textarea"
               rows="3"
               placeholder="Description Of Your Book"
@@ -129,6 +154,7 @@ const AddItems = () => {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="checkout-labels">Price</Form.Label>
             <Form.Control
+              onChange={handleAddBook}
               type="number"
               name="price"
               placeholder="Number of Stock"
@@ -139,6 +165,7 @@ const AddItems = () => {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="checkout-labels">Number Of Stock</Form.Label>
             <Form.Control
+              onChange={handleAddBook}
               type="number"
               name="quantity"
               placeholder="Number of Stock"
