@@ -7,8 +7,7 @@ const HeroSection = () => {
       <div className="container d-flex flex-lg-row flex-column-reverse justify-content-center align-items-center ">
         <div>
           <h1 className="hero-header">
-            Lets You Manage Your{" "}
-            <span className="text-primary">Aesthetic  Book Store</span> Simply
+            Lets You Manage Your <span className="text-primary">Aesthetic  Book Store</span> Simply
             Like Never Before
           </h1>
           <p className="hero-details mt-4">

@@ -70,7 +70,7 @@ const Home = () => {
 
       <div className="d-flex flex-column-reverse flex-lg-row align-items-center second-section">
         <div className="container ms-lg-5  second-section-left">
-          <h2 className="second-section-headline my-lg-3 mb-3 text-center text-lg-start ">
+          <h2 className="second-section-headline my-lg-3 my-3 mb-3 text-center text-lg-start ">
             There are 800+ Books Ready to Manage and Store
           </h2>
           <p className="second-section-paragraph mb-3 text-center text-lg-start">
@@ -111,16 +111,16 @@ const Home = () => {
       </div>
 
       <div>
-        <div>
-          <button className="btn btn-primary d-block mx-auto">Download</button>
-          <h2 className="text-center">
-            Download <span>BookFly</span> Now!{" "}
+        <div className="mt-4 mt-lg-0">
+          <h2 className="text-center mb-4 third-section-headline ">
+            Download <span className="text-primary">BookFly</span> Today!{" "}
           </h2>
-          <p className="text-center">
+          <p className="text-center third-section-paragraph">
             Optimized For Posts on All Social Media: Facebook, Instagram &
-            Twitter.Design Templates Are Highly Customizable, it's easy to use!
+            Twitter.Books In your Warehouse is easily manageable! Give it A try
+            to Your Store Today!
           </p>
-          <div className="d-flex justify-content-center ">
+          <div className="d-flex justify-content-center mt-lg-0 mt-4 ">
             <button className="btn btn-primary d-block mx-4">
               Download Now
             </button>

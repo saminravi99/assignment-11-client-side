@@ -43,5 +43,10 @@
     .about-me-image-container{
         width: 100%
     }
+
+    .about-me-img{
+        width: 350px;
+        height: 350px;
+    }
 }
     
