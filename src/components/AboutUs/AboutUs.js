@@ -1,7 +1,7 @@
 import React from "react";
 import Leaflet from "../Leaflet/Leaflet";
 import "./AboutUs.css";
-import team from "../../img/team.webp"
+import team from "../../img/team.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,

@@ -7,7 +7,10 @@ import auth from "../firebase.init";
 import "./AddItems.css";
 
 const AddItems = () => {
+  //React Firebase Hook
   const [authUser] = useAuthState(auth);
+
+  //Declaring React  States
   const [addBook, setAddBook] = useState({
     bookName: "",
     author: "",
@@ -27,7 +30,8 @@ const AddItems = () => {
     description: "",
     image: "",
   });
-  console.log(addBook);
+
+  //Click Handler Function for Adding a new Book
   const handleAddBook = (e) => {
     setAddBook({
       ...addBook,
@@ -39,9 +43,7 @@ const AddItems = () => {
     });
   };
 
-  console.log(addBook);
-  console.log(userInfo);
-
+  //Click Handler Function for Submitting New Book and User Info To The Server API
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -62,8 +64,6 @@ const AddItems = () => {
         }
       });
 
-    //(https://warehouse-management-saminravi.herokuapp.com/user)
-    //(http://localhost:5000/user)
     axiosPrivate
       .post(
         "https://warehouse-management-saminravi.herokuapp.com/user",

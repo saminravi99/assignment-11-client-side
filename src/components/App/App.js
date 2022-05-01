@@ -23,17 +23,15 @@ import useToken from "../hooks/useToken";
 export const AllContext = createContext();
 
 function App() {
+  //React Firebase Hook
   const [authUser] = useAuthState(auth);
 
-  console.log(authUser?.email);
-
+  //Custom Hook For creating JWT Token For Social Login, Email Password Login And SignUp
   const [token] = useToken(authUser);
-
   console.log(token);
 
+  // Custom Hook For Fetching All Books From The Server API
   const [books] = useBooks();
-
-  console.log(books);
 
   return (
     <AllContext.Provider value={{ books }}>
