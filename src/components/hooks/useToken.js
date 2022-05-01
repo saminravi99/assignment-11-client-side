@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-//https://warehouse-management-saminravi.herokuapp.com/login
+//
 
 const useToken = (user) => {
   const [token, setToken] = useState("");
@@ -11,7 +11,7 @@ const useToken = (user) => {
       const email = user?.email;
       if (email) {
         const { data } = await axios.post(
-          "http://localhost:5000/login",
+          "https://warehouse-management-saminravi.herokuapp.com/login",
           { email }
         );
         setToken(data.accessToken);
