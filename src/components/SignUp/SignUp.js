@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
 
 import "./SignUp.css";
+import useToken from "../hooks/useToken";
 
 const SignUp = () => {
 
@@ -19,13 +20,19 @@ const SignUp = () => {
   const [check, setCheck] = useState(false);
 
 
+  const location = useLocation();
+  let from = location?.state?.from?.pathname || "/";
+
+
   //Using React Firebase Hooks
-  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(
+  const [createUserWithEmailAndPassword, signUpUser] = useCreateUserWithEmailAndPassword(
     auth,
     {
       sendEmailVerification: true,
     }
   );
+
+  const [token] = useToken(signUpUser);
 
   
   //Using React Router DOM
@@ -66,6 +73,11 @@ const SignUp = () => {
     createUserWithEmailAndPassword(email, password);
     navigate("/");
   };
+
+   if (token) {
+     navigate(from, { replace: true });
+   }
+
 
   return (
     <div className="container mx-auto my-5 sign-up-container login-box">

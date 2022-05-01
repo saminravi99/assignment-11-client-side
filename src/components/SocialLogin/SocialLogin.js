@@ -8,14 +8,17 @@ import {
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
-// import useAuth from "../hooks/useAuth";
 import "./SocialLogin.css";
 
 const SocialLogin = () => {
+
+
   //Using React Firebase Hooks
   const [signInWithFacebook] = useSignInWithFacebook(auth);
   const [signInWithGoogle] = useSignInWithGoogle(auth);
   const [signInWithGithub] = useSignInWithGithub(auth);
+
+  
 
   // Using React Firebase Hooks
   const [authUser] = useAuthState(auth);
@@ -69,6 +72,7 @@ const SocialLogin = () => {
   //     toast.success("Successfully Logged In");
   //   }
   // }, [authUser]);
+
 
   return (
     <div className="socials">

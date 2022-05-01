@@ -109,6 +109,25 @@ const Home = () => {
           <img className="img-right" src={second} alt="second" />
         </div>
       </div>
+
+      <div>
+        <div>
+          <button className="btn btn-primary d-block mx-auto">Download</button>
+          <h2 className="text-center">
+            Download <span>BookFly</span> Now!{" "}
+          </h2>
+          <p className="text-center">
+            Optimized For Posts on All Social Media: Facebook, Instagram &
+            Twitter.Design Templates Are Highly Customizable, it's easy to use!
+          </p>
+          <div className="d-flex justify-content-center ">
+            <button className="btn btn-primary d-block mx-4">
+              Download Now
+            </button>
+            <button className="btn btn-success d-block ">Say Thanks</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import SocialLogin from "../SocialLogin/SocialLogin";
 import "./Login.css";
 import toast from "react-hot-toast";
 import Loading from "../Loading/Loading";
+import useToken from "../hooks/useToken";
 
 const Login = () => {
   //Declaring State to Keep The values of Input Field
@@ -20,6 +21,9 @@ const Login = () => {
   //Using React Firebase Hooks
   const [signInWithEmailAndPassword, signInUser, signInLoading, signInError] =
     useSignInWithEmailAndPassword(auth);
+
+
+    const [token] = useToken(signInUser);
 
   const [sendPasswordResetEmail, resetEmailSending, resetError] =
     useSendPasswordResetEmail(auth);
@@ -88,6 +92,11 @@ const Login = () => {
       setError("");
     }
   }, 7000);
+
+   if (token) {
+     navigate(from, { replace: true });
+   }
+
 
   return (
     <div className="login-box">

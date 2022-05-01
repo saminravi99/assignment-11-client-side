@@ -1,30 +1,39 @@
-import './App.css';
-import React, { createContext } from 'react';
-import Header from '../Header/Header';
-import { Route, Routes } from 'react-router-dom';
-import Footer from '../Footer/Footer';
-import Home from '../Home/Home';
-import Inventory from '../Inventory/Inventory';
-import MyItems from '../MyItems/MyItems';
-import AddItems from '../AddItems/AddItems';
-import Blogs from '../Blogs/Blogs';
-import Login from '../Login/Login';
-import SignUp from '../SignUp/SignUp';
-import NotFound from '../NotFound/NotFound';
-import useBooks from '../../components/hooks/useBooks';
-import RequireAuth from '../RequireAuth/RequireAuth';
-import { Toaster } from 'react-hot-toast';
-import Update from '../Update/Update';
-import AboutUs from '../AboutUs/AboutUs';
+import "./App.css";
+import React, { createContext } from "react";
+import Header from "../Header/Header";
+import { Route, Routes } from "react-router-dom";
+import Footer from "../Footer/Footer";
+import Home from "../Home/Home";
+import Inventory from "../Inventory/Inventory";
+import MyItems from "../MyItems/MyItems";
+import AddItems from "../AddItems/AddItems";
+import Blogs from "../Blogs/Blogs";
+import Login from "../Login/Login";
+import SignUp from "../SignUp/SignUp";
+import NotFound from "../NotFound/NotFound";
+import useBooks from "../../components/hooks/useBooks";
+import RequireAuth from "../RequireAuth/RequireAuth";
+import { Toaster } from "react-hot-toast";
+import Update from "../Update/Update";
+import AboutUs from "../AboutUs/AboutUs";
+import auth from "../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
+import useToken from "../hooks/useToken";
 
 export const AllContext = createContext();
 
-
 function App() {
-  
-const [books] = useBooks();
+  const [authUser] = useAuthState(auth);
 
-console.log(books);
+  console.log(authUser?.email);
+
+  const [token] = useToken(authUser);
+
+  console.log(token);
+
+  const [books] = useBooks();
+
+  console.log(books);
 
   return (
     <AllContext.Provider value={{ books }}>
