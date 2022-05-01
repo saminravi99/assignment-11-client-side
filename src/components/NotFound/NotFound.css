@@ -1,7 +1,7 @@
-.not-found{
-    height: 100vh;
-    font-family: "DM Sans";
-    font-weight: 700;
+.not-found {
+  height: 100vh;
+  font-family: "DM Sans";
+  font-weight: 700;
 }
 
 .notfoundID {
@@ -14,8 +14,8 @@
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .notfound {
@@ -36,7 +36,7 @@
   font-size: 186px;
   margin: 0px;
   text-transform: uppercase;
-  background: url('../../../public/text.png');
+  background: url("../../../public/text.png");
   background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: cover;
@@ -84,4 +84,3 @@
     font-size: 120px;
   }
 }
-

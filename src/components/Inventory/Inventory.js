@@ -7,23 +7,23 @@ import Loading from "../Loading/Loading";
 import "./Inventory.css";
 
 const Inventory = () => {
+  //Custom Hook For Fetching All Books From The Server API
   const [books, setBooks, isLoading] = useBooks();
+  const [userAddedBooks, setUserAddedBooks] = useState([]);
 
+  //React Firebase Hook
   const [user] = useAuthState(auth);
   const email = user?.email;
 
-  const [userAddedBooks, setUserAddedBooks] = useState([]);
-
-  console.log(userAddedBooks);
+  //useEffect Hook to fetch books added by a particular user
   const url = `https://warehouse-management-saminravi.herokuapp.com/user?email=${email}`;
-
   useEffect(() => {
-    fetch(url,{
-      headers:{
-        "Content-Type":"application/json",
-        "email":`${user?.email}`,
-        "authorization":`Bearer ${localStorage.getItem("accessToken")}`
-      }
+    fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        email: `${user?.email}`,
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -31,16 +31,20 @@ const Inventory = () => {
       });
   }, [url, user]);
 
+  //Navigate Hook
   const navigate = useNavigate();
 
+  //Click Handler Function to Navigate to Add Items Page
   const handleAddNewItem = () => {
     navigate("/add-items");
   };
 
+  //Click Handler Function to Navigate to Update Stock Page
   const handleUpdateStock = (id) => {
     navigate(`/inventory/${id}`);
   };
 
+  //Click Handler Function Delete Book From Inventory
   const handleDeleteBook = (id, bookName) => {
     const proceed = window.confirm("Are you sure?");
     if (proceed) {
@@ -49,8 +53,8 @@ const Inventory = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "email": `${user?.email}`,
-          "authorization": `Bearer ${localStorage.getItem("accessToken")}`
+          email: `${user?.email}`,
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       })
         .then((res) => res.json())
@@ -71,23 +75,19 @@ const Inventory = () => {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
-              "email": `${user?.email}`,
-              "authorization": `Bearer ${localStorage.getItem("accessToken")}`
+              email: `${user?.email}`,
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
           })
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
-             
             });
-        }
-          
-        )
-
-      
+        });
     }
   };
 
+  //Map Function to Render Inventory
   const book = books.map((book) => {
     return (
       <div className="col-12 col-lg-4 my-3" key={book._id}>

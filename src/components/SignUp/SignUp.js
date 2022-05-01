@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
-
 import "./SignUp.css";
-import useToken from "../hooks/useToken";
 
 const SignUp = () => {
-
   //Declaring State to Keep The values of Input Field
   const [name, setName] = useState("");
   console.log(name);
@@ -19,22 +16,14 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const [check, setCheck] = useState(false);
 
-
-  const location = useLocation();
-  let from = location?.state?.from?.pathname || "/";
-
-
   //Using React Firebase Hooks
-  const [createUserWithEmailAndPassword, signUpUser] = useCreateUserWithEmailAndPassword(
+  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(
     auth,
     {
       sendEmailVerification: true,
     }
   );
 
-  const [token] = useToken(signUpUser);
-
-  
   //Using React Router DOM
   const navigate = useNavigate();
 
@@ -47,7 +36,7 @@ const SignUp = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-   //Validating Password and Confirm Password
+    //Validating Password and Confirm Password
     if (password.length < 8) {
       setError("Password must be at least 8 characters");
       return;
@@ -73,11 +62,6 @@ const SignUp = () => {
     createUserWithEmailAndPassword(email, password);
     navigate("/");
   };
-
-   if (token) {
-     navigate(from, { replace: true });
-   }
-
 
   return (
     <div className="container mx-auto my-5 sign-up-container login-box">

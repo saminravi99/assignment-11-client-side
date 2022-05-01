@@ -24,27 +24,8 @@ const Update = () => {
   //Using Array Find Method For Dynamic Checkout Route
   const chosenBook = books?.find((book) => book?._id === params?.id);
 
-  console.log(chosenBook);
-
+  //Declaring React States
   const [userBook, setUserBook] = useState([]);
-
-  console.log(userBook);
-
-  useEffect(() => {
-    fetch(
-      `https://warehouse-management-saminravi.herokuapp.com/user?email=${authUser?.email}`,
-      {
-        headers: {
-          "email": `${authUser?.email}`,
-          "authorization": `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setUserBook(data);
-      });
-  }, [authUser?.email]);
 
   const [updateStock, setUpdateStock] = useState({
     _id: "",
@@ -58,10 +39,26 @@ const Update = () => {
 
   const [stockUpdateUser, setStockUpdateUser] = useState({});
 
-  console.log(stockUpdateUser);
+  const [bookQuantity, setBookQuantity] = useState(0);
 
-  console.log(updateStock);
+  //useEffect Hook to fetch the only books added by a user
+  useEffect(() => {
+    fetch(
+      `https://warehouse-management-saminravi.herokuapp.com/user?email=${authUser?.email}`,
+      {
+        headers: {
+          email: `${authUser?.email}`,
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setUserBook(data);
+      });
+  }, [authUser?.email]);
 
+  // Click Handler Function for Updating Book Stock
   const handleStockChange = (e) => {
     setUpdateStock({
       bookName: chosenBook?.bookName,
@@ -84,10 +81,7 @@ const Update = () => {
     });
   };
 
-  const [bookQuantity, setBookQuantity] = useState(0);
-
-  console.log(bookQuantity);
-
+  //Click Handler Function for Submitting New Book and User Info To The Server API
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -101,15 +95,14 @@ const Update = () => {
         updateStock,
         {
           headers: {
-            email: authUser.email
-          }
+            email: authUser.email,
+          },
         }
-            
       )
       .then((response) => {
         const { data } = response;
         if (data.insertedId) {
-          toast.success("Book Updated Successfully");
+          toast.success("Stock Updated Successfully");
         }
         axiosPrivate
           .post(
@@ -150,10 +143,11 @@ const Update = () => {
           });
 
         e.target.reset();
-        toast.success("Book Added Successfully");
+        toast.success("Stock Updated Successfully");
       });
   };
 
+  //Click Handler Function to Deliver a book
   const handleDeliver = () => {
     if (chosenBook.quantity > 0) {
       if (bookQuantity > 0) {
@@ -172,10 +166,6 @@ const Update = () => {
         quantity: chosenBook.quantity,
       });
     }
-    //https://warehouse-management-saminravi.herokuapp.com/inventory/${chosenBook._id}
-    //(http://localhost:5000/inventory/${chosenBook._id})
-    //(http://localhost:5000/users/${requiredBook._id})
-    //https://warehouse-management-saminravi.herokuapp.com/users/${requiredBook._id}
     axiosPrivate
       .put(
         `https://warehouse-management-saminravi.herokuapp.com/inventory/${chosenBook._id}`,
@@ -231,9 +221,7 @@ const Update = () => {
           });
       });
   };
-
-  console.log(chosenBook);
-
+  //useEffect Hook to reload the page after stock quantity updated during delivery of the book
   useEffect(() => {
     console.log(chosenBook?.quantity);
   }, [chosenBook?.quantity]);
@@ -243,6 +231,7 @@ const Update = () => {
     navigate("/inventory");
   };
 
+  //useEffect Hook to reload Page after the stock is updated
   useEffect(() => {
     console.log(updateStock);
   }, [updateStock, chosenBook?.quantity]);

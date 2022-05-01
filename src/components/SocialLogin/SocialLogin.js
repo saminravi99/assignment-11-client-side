@@ -11,14 +11,10 @@ import auth from "../firebase.init";
 import "./SocialLogin.css";
 
 const SocialLogin = () => {
-
-
   //Using React Firebase Hooks
   const [signInWithFacebook] = useSignInWithFacebook(auth);
   const [signInWithGoogle] = useSignInWithGoogle(auth);
   const [signInWithGithub] = useSignInWithGithub(auth);
-
-  
 
   // Using React Firebase Hooks
   const [authUser] = useAuthState(auth);
@@ -66,13 +62,6 @@ const SocialLogin = () => {
         }
       });
   };
-
-  // useEffect(() => {
-  //   if (authUser) {
-  //     toast.success("Successfully Logged In");
-  //   }
-  // }, [authUser]);
-
 
   return (
     <div className="socials">
