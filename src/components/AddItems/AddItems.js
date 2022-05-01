@@ -1,8 +1,8 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
+import axiosPrivate from "../../api/axiosPrivate";
 import auth from "../firebase.init";
 import "./AddItems.css";
 
@@ -44,12 +44,16 @@ const AddItems = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
 
-    axios
+    axiosPrivate
       .post(
         "https://warehouse-management-saminravi.herokuapp.com/book",
-        addBook
+        addBook,
+        {
+          headers: {
+            email: authUser.email,
+          },
+        }
       )
       .then((response) => {
         const { data } = response;
@@ -57,10 +61,18 @@ const AddItems = () => {
           toast.success("Book Added Successfully");
         }
       });
-    axios
+
+    //(https://warehouse-management-saminravi.herokuapp.com/user)
+    //(http://localhost:5000/user)
+    axiosPrivate
       .post(
         "https://warehouse-management-saminravi.herokuapp.com/user",
-        userInfo
+        userInfo,
+        {
+          headers: {
+            email: authUser.email,
+          },
+        }
       )
       .then((response) => {
         const { data } = response;

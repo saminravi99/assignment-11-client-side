@@ -1,11 +1,11 @@
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
+import axiosPrivate from "../../api/axiosPrivate";
 import { AllContext } from "../App/App";
 import auth from "../firebase.init";
 import "./Update.css";
@@ -32,7 +32,13 @@ const Update = () => {
 
   useEffect(() => {
     fetch(
-      `https://warehouse-management-saminravi.herokuapp.com/user?email=${authUser?.email}`
+      `https://warehouse-management-saminravi.herokuapp.com/user?email=${authUser?.email}`,
+      {
+        headers: {
+          "email": `${authUser?.email}`,
+          "authorization": `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => {
@@ -89,20 +95,31 @@ const Update = () => {
       setBookQuantity(e.target.quantity.value);
     }
 
-    axios
+    axiosPrivate
       .put(
         `https://warehouse-management-saminravi.herokuapp.com/inventory/${chosenBook._id}`,
-        updateStock
+        updateStock,
+        {
+          headers: {
+            email: authUser.email
+          }
+        }
+            
       )
       .then((response) => {
         const { data } = response;
         if (data.insertedId) {
           toast.success("Book Updated Successfully");
         }
-        axios
+        axiosPrivate
           .post(
             `https://warehouse-management-saminravi.herokuapp.com/userStockUpdate`,
-            stockUpdateUser
+            stockUpdateUser,
+            {
+              headers: {
+                email: authUser.email,
+              },
+            }
           )
           .then((response) => {
             const { data } = response;
@@ -114,10 +131,15 @@ const Update = () => {
             const requiredBook = userBook.find(
               (book) => book.bookName === chosenBook.bookName
             );
-            axios
+            axiosPrivate
               .put(
                 `https://warehouse-management-saminravi.herokuapp.com/users/${requiredBook._id}`,
-                stockUpdateUser
+                stockUpdateUser,
+                {
+                  headers: {
+                    email: authUser.email,
+                  },
+                }
               )
               .then((response) => {
                 const { data } = response;
@@ -154,7 +176,7 @@ const Update = () => {
     //(http://localhost:5000/inventory/${chosenBook._id})
     //(http://localhost:5000/users/${requiredBook._id})
     //https://warehouse-management-saminravi.herokuapp.com/users/${requiredBook._id}
-    axios
+    axiosPrivate
       .put(
         `https://warehouse-management-saminravi.herokuapp.com/inventory/${chosenBook._id}`,
         {
@@ -164,6 +186,11 @@ const Update = () => {
           description: chosenBook?.description,
           image: chosenBook?.image,
           quantity: chosenBook.quantity,
+        },
+        {
+          headers: {
+            email: authUser.email,
+          },
         }
       )
       .then((response) => {
@@ -177,7 +204,7 @@ const Update = () => {
         const requiredBook = userBook.find(
           (book) => book.bookName === chosenBook.bookName
         );
-        axios
+        axiosPrivate
           .put(
             `https://warehouse-management-saminravi.herokuapp.com/users/${requiredBook._id}`,
             {
@@ -189,6 +216,11 @@ const Update = () => {
               description: chosenBook?.description,
               image: chosenBook?.image,
               quantity: chosenBook.quantity,
+            },
+            {
+              headers: {
+                email: authUser.email,
+              },
             }
           )
           .then((response) => {

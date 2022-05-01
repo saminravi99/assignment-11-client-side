@@ -17,12 +17,18 @@ const Inventory = () => {
   const url = `https://warehouse-management-saminravi.herokuapp.com/user?email=${email}`;
 
   useEffect(() => {
-    fetch(url)
+    fetch(url,{
+      headers:{
+        "Content-Type":"application/json",
+        "email":`${user?.email}`,
+        "authorization":`Bearer ${localStorage.getItem("accessToken")}`
+      }
+    })
       .then((res) => res.json())
       .then((data) => {
         setUserAddedBooks(data);
       });
-  }, [url]);
+  }, [url, user]);
 
   const navigate = useNavigate();
 
@@ -40,6 +46,11 @@ const Inventory = () => {
       const url = `https://warehouse-management-saminravi.herokuapp.com/books/${id}`;
       fetch(url, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "email": `${user?.email}`,
+          "authorization": `Bearer ${localStorage.getItem("accessToken")}`
+        },
       })
         .then((res) => res.json())
         .then((data) => {
@@ -53,10 +64,15 @@ const Inventory = () => {
             (book) => book.bookName === bookName
           );
 
-          const userUrl = `https://warehouse-management-saminravi.herokuapp.com/users/${userAddedBook._id}`;
+          const userUrl = `https://warehouse-management-saminravi.herokuapp.com/users/${userAddedBook?._id}`;
 
           fetch(userUrl, {
             method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              "email": `${user?.email}`,
+              "authorization": `Bearer ${localStorage.getItem("accessToken")}`
+            },
           })
             .then((res) => res.json())
             .then((data) => {

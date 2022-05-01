@@ -19,7 +19,12 @@ const MyItems = () => {
       const email = user?.email;
       const url = `https://warehouse-management-saminravi.herokuapp.com/user?email=${email}`;
       try {
-        const { data } = await axiosPrivate.get(url);
+        const { data } = await axiosPrivate.get(url, {
+          headers: {
+            email: user.email,
+            authorization : `Bearer ${localStorage.getItem('accessToken')}`
+          }
+        });
         setMyItems(data);
       } catch (error) {
         console.log(error.message);
@@ -48,6 +53,11 @@ const MyItems = () => {
 
       fetch(userUrl, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "email": `${user?.email}`,
+          "authorization": `Bearer ${localStorage.getItem("accessToken")}`
+        },
       })
         .then((res) => res.json())
         .then((data) => {
@@ -58,6 +68,11 @@ const MyItems = () => {
 
           fetch(url, {
             method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              "email": `${user?.email}`,
+              "authorization": `Bearer ${localStorage.getItem('accessToken')}`
+            },
           })
             .then((res) => res.json())
             .then((data) => {
