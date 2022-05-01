@@ -149,7 +149,7 @@ const Update = () => {
               });
           });
 
-        // e.target.reset();
+        e.target.reset();
         toast.success("Book Added Successfully");
       });
   };

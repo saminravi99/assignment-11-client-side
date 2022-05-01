@@ -80,7 +80,7 @@ const AddItems = () => {
           console.log("User Added Successfully");
         }
       });
-    // e.target.reset();
+    e.target.reset();
     toast.success("Book Added Successfully");
   };
 

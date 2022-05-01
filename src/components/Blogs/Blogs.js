@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import Loading from '../Loading/Loading';
 import "./Blogs.css"
 
 const Blogs = () => {
 
 
   const [blogs, setBlogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   console.log(blogs);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch("https://warehouse-management-saminravi.herokuapp.com/blogs")
       .then((res) => res.json())
-      .then((data) => setBlogs(data));
+      .then((data) => {
+        setBlogs(data);
+        setIsLoading(false);
+      });
   }
     , [])
 
@@ -45,7 +51,10 @@ const Blogs = () => {
 
     return (
       <div className="padding-nav">
-        <div className="row mx-auto my-lg-0 my-4">{blog}</div>
+        {isLoading ? (<Loading></Loading>
+        ) : (
+          <div className="row mx-auto my-lg-0 my-4">{blog}</div>
+        )}
       </div>
     );
 };

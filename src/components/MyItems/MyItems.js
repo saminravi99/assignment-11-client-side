@@ -5,16 +5,19 @@ import { useNavigate } from "react-router-dom";
 import axiosPrivate from "../../api/axiosPrivate";
 import auth from "../firebase.init";
 import useBooks from "../hooks/useBooks";
+import Loading from "../Loading/Loading";
 import "./MyItems.css";
 
 const MyItems = () => {
   const [user] = useAuthState(auth);
   const [myItems, setMyItems] = useState([]);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [books] = useBooks();
 
   useEffect(() => {
+    setIsLoading(true);
     const getUserItems = async () => {
       const email = user?.email;
       const url = `https://warehouse-management-saminravi.herokuapp.com/user?email=${email}`;
@@ -26,6 +29,8 @@ const MyItems = () => {
           }
         });
         setMyItems(data);
+        setIsLoading(false);
+
       } catch (error) {
         console.log(error.message);
         if (error.response.status === 401 || error.response.status === 403) {
@@ -87,7 +92,11 @@ const MyItems = () => {
 
   return (
     <div className="padding-nav">
-      <h1 className="text-center text-muted mt-4">Your Added Items</h1>
+     {isLoading ? (
+       <Loading></Loading>
+      ) : (
+        <div>
+           <h1 className="text-center text-muted mt-4">{myItems.length > 0? "Your Added Items" : "You Have Added No Items"}</h1>
       <div className="container mt-5">
         <div className="row">
           {myItems?.map((item) => (
@@ -129,6 +138,8 @@ const MyItems = () => {
           ))}
         </div>
       </div>
+        </div>
+        )}
     </div>
   );
 };

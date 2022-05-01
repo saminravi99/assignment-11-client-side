@@ -3,10 +3,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
 import useBooks from "../hooks/useBooks";
+import Loading from "../Loading/Loading";
 import "./Inventory.css";
 
 const Inventory = () => {
-  const [books, setBooks] = useBooks();
+  const [books, setBooks, isLoading] = useBooks();
 
   const [user] = useAuthState(auth);
   const email = user?.email;
@@ -129,15 +130,21 @@ const Inventory = () => {
 
   return (
     <div className="padding-nav">
-      <div className="row container mx-auto">{book}</div>
-      <div>
-        <button
-          onClick={handleAddNewItem}
-          className="btn btn-primary d-block mx-auto px-5 py-2 my-4"
-        >
-          Add New Item
-        </button>
-      </div>
+      {isLoading ? (
+        <Loading></Loading>
+      ) : (
+        <div>
+          <div className="row container mx-auto">{book}</div>
+          <div>
+            <button
+              onClick={handleAddNewItem}
+              className="btn btn-primary d-block mx-auto px-5 py-2 my-4"
+            >
+              Add New Item
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
