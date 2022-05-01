@@ -8,7 +8,6 @@ const useToken = (user) => {
   //useEffect Hook to Create JWT Token during Login And Sign Up
   useEffect(() => {
     const getToken = async () => {
-      console.log(user);
       const email = user?.email;
       if (email) {
         const { data } = await axios.post(

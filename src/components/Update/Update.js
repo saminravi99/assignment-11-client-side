@@ -156,6 +156,7 @@ const Update = () => {
       } else {
         chosenBook.quantity = chosenBook.quantity - 1;
       }
+     
 
       setUpdateStock({
         bookName: chosenBook?.bookName,
@@ -165,6 +166,8 @@ const Update = () => {
         image: chosenBook?.image,
         quantity: chosenBook.quantity,
       });
+    }else{
+      toast.error("Stock Not Available");
     }
     axiosPrivate
       .put(
@@ -187,7 +190,11 @@ const Update = () => {
         const { data } = response;
         console.log(data);
         if (data.matchedCount) {
-          toast.success("Book Delivered Successfully");
+          if(chosenBook.quantity >= 1){
+            toast.success("Book Delivered Successfully");
+          }else{
+            toast.error("Stock Not Available");
+          }
         }
       })
       .then(() => {

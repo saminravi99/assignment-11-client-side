@@ -61,9 +61,7 @@ const Inventory = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           const remaining = books.filter((book) => book._id !== id);
-          console.log(remaining);
           setBooks(remaining);
         })
         .then(() => {

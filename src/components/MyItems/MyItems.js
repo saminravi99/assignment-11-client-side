@@ -55,7 +55,6 @@ const MyItems = () => {
 
   //Click Handler Function for Deleting a Book from My Items Page
   const handleMyItemDelete = (id, bookName) => {
-    console.log(id);
 
     const proceed = window.confirm("Are you sure?");
     if (proceed) {

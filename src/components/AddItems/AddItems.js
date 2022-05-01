@@ -1,14 +1,19 @@
 import { faFilePen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import axiosPrivate from "../../api/axiosPrivate";
 import auth from "../firebase.init";
+import useBooks from "../hooks/useBooks";
 import "./AddItems.css";
 
+
+
 const AddItems = () => {
+const [books] = useBooks();
+
   //React Firebase Hook
   const [authUser] = useAuthState(auth);
 
@@ -21,6 +26,7 @@ const AddItems = () => {
     description: "",
     image: "",
   });
+
 
   const [userInfo, setUserInfo] = useState({
     user: authUser.displayName,
@@ -35,6 +41,7 @@ const AddItems = () => {
 
   //Click Handler Function for Adding a new Book
   const handleAddBook = (e) => {
+   
     setAddBook({
       ...addBook,
       [e.target.name]: e.target.value,
@@ -43,7 +50,15 @@ const AddItems = () => {
       ...userInfo,
       [e.target.name]: e.target.value,
     });
+    
   };
+
+  useEffect(() => {
+     if(addBook?.bookName === books?.find(book => book?.bookName === addBook?.bookName)?.bookName){
+      toast.error("Book Already Exists");
+    }
+
+  } , [addBook, books]);
 
   //Click Handler Function for Submitting New Book and User Info To The Server API
   const handleSubmit = (e) => {
@@ -191,6 +206,9 @@ const AddItems = () => {
             className="px-5 d-block mx-auto checkout-labels"
             variant="primary"
             type="submit"
+            disabled={
+              addBook?.bookName === books?.find(book => book?.bookName === addBook?.bookName)?.bookName ? true : false
+            }
           >
             Add This Item To The Store
             <FontAwesomeIcon className="ms-2" icon={faFilePen} />
