@@ -1,10 +1,10 @@
-import { faArrowLeft, faTruck, faFilePen } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faTruck, faFilePen, faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import axiosPrivate from "../../api/axiosPrivate";
 import { AllContext } from "../App/App";
 import auth from "../firebase.init";
@@ -234,14 +234,20 @@ const Update = () => {
   }, [chosenBook?.quantity]);
 
   // Using Function to Return to Previous Page
+  
+
   const handleGoBack = () => {
-    navigate("/inventory");
+    navigate(-1);
   };
 
   //useEffect Hook to reload Page after the stock is updated
   useEffect(() => {
     console.log(updateStock);
   }, [updateStock, chosenBook?.quantity]);
+
+  const handleGoBackToInventory = () => {
+    navigate("/inventory");
+  }
 
   return (
     <div>
@@ -354,6 +360,16 @@ const Update = () => {
             </Button>
           </Form>
         </div>
+      </div>
+
+      <div className="my-5">
+        <button
+          onClick={handleGoBackToInventory}
+          className="btn btn-secondary d-block mx-auto px-5"
+        >
+          Manage Inventory
+          <FontAwesomeIcon className="ms-2" icon={faFileCirclePlus} />
+        </button>
       </div>
     </div>
   );

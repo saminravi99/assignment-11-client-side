@@ -71,7 +71,7 @@ const Home = () => {
           onClick={handleInventory}
           className="btn btn-primary d-block mx-auto px-5 py-2 my-4"
         >
-          Manage All Books
+          Manage Inventories
           <FontAwesomeIcon  className="ms-2" icon={faFileCirclePlus} />
         </button>
       </div>
