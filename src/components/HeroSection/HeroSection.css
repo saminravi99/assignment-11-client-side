@@ -1,27 +1,25 @@
-.hero-header{
-    font-family: "DM Sans";
-    line-height: 1.5;
+.hero-header {
+  font-family: "DM Sans";
+  line-height: 1.5;
 }
 
-.hero-details{
+.hero-details {
   font-family: "DM Sans";
   line-height: 2;
 }
 
 @media screen and (max-width: 576px) {
-  .hero-header{
+  .hero-header {
     font-size: 1.2rem;
     color: black;
     text-align: center;
   }
-  .hero-details{
+  .hero-details {
     font-size: 1rem;
     color: black;
     text-align: center;
   }
-  .hero-image{
+  .hero-image {
     width: 350px;
   }
-  
 }
-    

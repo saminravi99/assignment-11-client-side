@@ -10,7 +10,6 @@
 }
 
 .card-text {
-  /* font-size: 14px; */
   font-family: "DM Sans", sans-serif;
   line-height: 1.5;
 }
@@ -38,7 +37,6 @@
 
 .second-section-paragraph {
   color: #697b98;
-  /* width: 500px; */
 }
 
 .img-right {
@@ -57,12 +55,10 @@
 @media screen and (max-width: 768px) {
   .home-container {
     margin-top: 280px !important;
-    /* overflow-x: hidden; */
   }
   .img-right {
     width: 420px;
     height: 420px;
-    /* padding: 10px; */
   }
   .second-section-right {
     background-image: linear-gradient(
@@ -75,8 +71,8 @@
   .second-section {
     overflow-x: hidden !important;
   }
-  .third-section-headline{
-      font-family: "DM Sans";
+  .third-section-headline {
+    font-family: "DM Sans";
   }
   .third-section-paragraph {
     width: 90%;
@@ -87,7 +83,7 @@
   }
   .book-price {
     font-size: 10px;
-    width:  90px;
+    width: 90px;
     padding: 5px 10px;
     border-radius: 25px;
     border: 1px solid #a7c0e9;

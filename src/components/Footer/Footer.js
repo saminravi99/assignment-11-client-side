@@ -1,11 +1,18 @@
 import "./Footer.css";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faMessage, faPhone, faLocationDot, faBriefcase, faAward  } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMessage,
+  faPhone,
+  faLocationDot,
+  faBriefcase,
+  faAward,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
-    const date = new Date();
-    const year = date.getFullYear();
+  //Function to get new date and year for copyright text
+  const date = new Date();
+  const year = date.getFullYear();
   return (
     <div>
       <footer className="footer-bg">

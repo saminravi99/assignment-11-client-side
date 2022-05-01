@@ -2,25 +2,31 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AllContext } from "../App/App";
 import "./Home.css";
-import second from "../../img/second.png"
+import second from "../../img/second.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleDot } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
+  //Context API
   const { books } = useContext(AllContext);
 
+  //Navigate Hook
   const navigate = useNavigate();
 
+  //Slicing to show maximum 6 items in the home page
   const slicedBooks = books.slice(0, 6);
 
+  //Function to navigate to the inventory page
   const handleInventory = () => {
     navigate("/inventory");
   };
 
+  //Function to update the stock of the items of the inventory
   const handleUpdateStock = (id) => {
     navigate(`/inventory/${id}`);
   };
 
+  //Mapping books array to show the items in the home page
   const eachBook = slicedBooks.map((book) => {
     return (
       <div className="col-12 col-lg-4" key={book._id}>

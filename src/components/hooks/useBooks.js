@@ -4,15 +4,19 @@ import { useLocation } from "react-router-dom";
 import auth from "../firebase.init";
 
 const useBooks = () => {
+
+  //Declaring State
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  // React Firebase Hook
   const [authUser] = useAuthState(auth);
 
+  //React Pathname Hook
   const { pathname } = useLocation();
 
-  // console.log(pathname);
 
+  // React Hook for Fetching All Books From The Server API
   useEffect(() => {
     setIsLoading(true);
     fetch("https://warehouse-management-saminravi.herokuapp.com/books", {

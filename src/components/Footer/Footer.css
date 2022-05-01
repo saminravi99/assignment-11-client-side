@@ -1,7 +1,11 @@
-.footer-bg{
-   background-image: linear-gradient(360deg, #E4EFFF , rgba(228, 239, 255, 0.6) , rgba(228, 239, 255, 0));
+.footer-bg {
+  background-image: linear-gradient(
+    360deg,
+    #e4efff,
+    rgba(228, 239, 255, 0.6),
+    rgba(228, 239, 255, 0)
+  );
 }
-
 
 #button-addon1 {
   color: #ffc371;
@@ -22,11 +26,11 @@ i {
 }
 
 li > a {
-    font-family: "DM Sans";
+  font-family: "DM Sans";
 }
 
-.footer-icons{
-    margin: 0px 10px;
-    color: #193766;
-    font-size: 1.2rem;
+.footer-icons {
+  margin: 0px 10px;
+  color: #193766;
+  font-size: 1.2rem;
 }

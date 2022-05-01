@@ -11,13 +11,13 @@ import { signOut } from "firebase/auth";
 import auth from "../firebase.init";
 
 const Header = () => {
+  // React Hooks for navigating and getting the pathname
   const { pathname } = useLocation();
   const navigate = useNavigate();
   let from = navigate?.state?.from?.pathname || "/login";
 
+  // React Firebase Hook for getting the current user
   const [authUser] = useAuth();
-
-  console.log(authUser);
 
   //Using Function to Sign Out Using Firebase Hooks
   const handleSignOut = () => {
@@ -35,7 +35,7 @@ const Header = () => {
         pathname === "/my-items" ||
         pathname === "/add-items" ||
         pathname === "/inventory" ||
-        pathname === "/about-us" 
+        pathname === "/about-us"
           ? `d-block`
           : `d-none`
       }
@@ -193,7 +193,6 @@ const Header = () => {
           <img src={headerImg} alt="img" />
         </div>
       </div>
-      
     </div>
   );
 };
