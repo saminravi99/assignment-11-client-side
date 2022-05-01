@@ -16,6 +16,8 @@
 
 *This project is a MERN Stack implemented project where you can keep and manage your book store warehouse. Here you can add the stocks of the books of your warehouse along with adding new books to the store. Also you can delete and deliver books from your warehouse. Once you deliver a book it will reduce an item by one.*
 
+*With our app, you can easily manage your books. Keep track of all the books you have to read and organize them together online. You'll be amazed by how efficiently you can add, edit and delete books as well as connect with book partners to share your experience.Unlike traditional book cataloging systems, our Book App helps you manage your entire library of books in one place. Create custom collections, track book series and more.All of your favorite books can now be stored in one place with our Book App. Whether you prefer reading a book on iBooks or Kindle, our app will have you covered.*
+
 ---
 
 # Technologies Used In This Project:

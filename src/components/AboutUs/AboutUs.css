@@ -1,0 +1,47 @@
+.about-me-title h1{
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 3px solid #ccc;
+    font-family: "DM Sans";
+}
+
+.about-me-container{
+    font-family: "DM Sans";
+}
+
+.about-me-text-container{
+    width: 60%
+}
+
+.about-me-text-container p{
+    line-height: 2;
+}
+
+.about-me-image-container{
+    width: 50%
+}
+
+.about-me-img{
+    width: 500px;
+    height: 500px;
+    /* border-radius: 50%; */
+}
+
+.leaflet-text h5{
+    font-family: "DM Sans";
+    font-weight: 700;
+
+}
+
+@media screen and (max-width: 768px){
+    .about-me-text-container{
+        width: 100%;
+        font-weight: 700;
+    }
+
+    .about-me-image-container{
+        width: 100%
+    }
+}
+    
