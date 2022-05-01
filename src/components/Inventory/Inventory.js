@@ -1,3 +1,5 @@
+import { faFileCirclePlus, faFilePen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -98,12 +100,14 @@ const Inventory = () => {
           <div className="card-body">
             <h5 className="card-title text-center">{book.bookName}</h5>
             <div className="d-flex justify-content-even align-items-center my-3">
-              <h6 className="card-text mb-0 mx-3">Author: {book.author}</h6>
+              <h6 className="card-text mb-0 mx-3 author-text">
+                Author: {book.author}
+              </h6>
               <p className="card-text book-price ">Price : $ {book.price}</p>
             </div>
             <p className="card-text card-description ">
-              <span className="description"> Description:</span>{" "}
-              {book.description.slice(0, 100)}...
+              <span className="description"> Description:</span>
+              {book.description.slice(0, 80)}...
             </p>
             <h6 className="card-text">Available Pieces: {book.quantity}</h6>
             <div className="">
@@ -112,6 +116,7 @@ const Inventory = () => {
                 className="btn btn-primary d-block mx-auto px-5 py-2 mt-4"
               >
                 Update Stock
+                <FontAwesomeIcon className="ms-2" icon={faFilePen} />
               </button>
               <div className="d-flex justify-content-center">
                 <button
@@ -119,6 +124,7 @@ const Inventory = () => {
                   className="btn btn-danger d-block px-5  py-2 my-4"
                 >
                   Delete
+                  <FontAwesomeIcon className="ms-2" icon={faTrashCan} />
                 </button>
               </div>
             </div>
@@ -141,6 +147,7 @@ const Inventory = () => {
               className="btn btn-primary d-block mx-auto px-5 py-2 my-4"
             >
               Add New Item
+              <FontAwesomeIcon className="ms-2" icon={faFileCirclePlus} />
             </button>
           </div>
         </div>

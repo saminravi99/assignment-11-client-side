@@ -1,4 +1,4 @@
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faTruck, faFilePen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
@@ -277,7 +277,8 @@ const Update = () => {
               onClick={handleDeliver}
               className="btn btn-success d-block mx-auto  px-5"
             >
-              Deliver
+              Deliver This Book
+              <FontAwesomeIcon className="ms-2" icon={faTruck} />
             </button>
           </div>
         </div>
@@ -342,6 +343,7 @@ const Update = () => {
               type="submit"
             >
               Update Stock
+              <FontAwesomeIcon className="ms-2" icon={faFilePen} />
             </Button>
           </Form>
         </div>

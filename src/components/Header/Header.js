@@ -9,6 +9,8 @@ import headerImg from "../../img/img6.png";
 import useAuth from "../hooks/useAuth";
 import { signOut } from "firebase/auth";
 import auth from "../firebase.init";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   // React Hooks for navigating and getting the pathname
@@ -138,6 +140,7 @@ const Header = () => {
                         onClick={handleSignOut}
                       >
                         Sign Out
+                        <FontAwesomeIcon className="ms-2" icon={faRightFromBracket} />
                       </button>
                     </span>
                   ) : (

@@ -1,3 +1,5 @@
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -117,10 +119,20 @@ const MyItems = () => {
                       <h4 className="card-title text-center mb-3">
                         {item.bookName}
                       </h4>
+                      <h6 className="text-success">
+                        {" "}
+                        <span className="text-muted">Author:</span>{" "}
+                        {item.author}
+                      </h6>
                       <p className="card-text">
                         {item.description.slice(0, 100)}...
                       </p>
-                      <small>{item.email}</small>
+                      <small>
+                        <span className="text-primary">
+                          Stock Updater's Email:
+                        </span>{" "}
+                        {item.email}
+                      </small>
                       <p className="card-text my-3">
                         <small className="text-muted">
                           Available pieces: {item.quantity}
@@ -140,6 +152,7 @@ const MyItems = () => {
                           className="btn btn-danger d-block mx-auto "
                         >
                           Delete This Book From Store
+                          <FontAwesomeIcon className="ms-2" icon={faTrashCan} />
                         </button>
                       </div>
                     </div>

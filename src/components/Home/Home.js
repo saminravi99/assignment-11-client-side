@@ -4,7 +4,7 @@ import { AllContext } from "../App/App";
 import "./Home.css";
 import second from "../../img/second.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleDot } from "@fortawesome/free-solid-svg-icons";
+import { faCircleDot, faDownload, faFileCirclePlus, faFilePen, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   //Context API
@@ -51,6 +51,7 @@ const Home = () => {
                 className="btn btn-primary d-block mx-auto px-5 py-2 mt-4"
               >
                 Update Stock
+                <FontAwesomeIcon className="ms-2" icon={faFilePen} />
               </button>
             </div>
           </div>
@@ -71,6 +72,7 @@ const Home = () => {
           className="btn btn-primary d-block mx-auto px-5 py-2 my-4"
         >
           Manage All Books
+          <FontAwesomeIcon  className="ms-2" icon={faFileCirclePlus} />
         </button>
       </div>
 
@@ -128,9 +130,13 @@ const Home = () => {
           </p>
           <div className="d-flex justify-content-center mt-lg-0 mt-4 ">
             <button className="btn btn-primary d-block mx-4">
+              <FontAwesomeIcon className="me-2" icon={faDownload} />
               Download Now
             </button>
-            <button className="btn btn-success d-block ">Say Thanks</button>
+            <button className="btn btn-success d-block ">
+              <FontAwesomeIcon className="me-2" icon={faHeart} />
+              Say Thanks
+            </button>
           </div>
         </div>
       </div>

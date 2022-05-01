@@ -1,3 +1,5 @@
+import { faFilePen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -191,6 +193,7 @@ const AddItems = () => {
             type="submit"
           >
             Add This Item To The Store
+            <FontAwesomeIcon className="ms-2" icon={faFilePen} />
           </Button>
         </Form>
       </div>
