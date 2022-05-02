@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { AllContext } from "../App/App";
 import "./Home.css";
 import second from "../../img/second.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleDot, faDownload, faFileCirclePlus, faFilePen, faHeart } from "@fortawesome/free-solid-svg-icons";
+import useBooks from "../hooks/useBooks";
+import Loading from "../Loading/Loading";
 
 const Home = () => {
-  //Context API
-  const { books } = useContext(AllContext);
 
+  const [books, setBooks , loading] = useBooks();
+  console.log(setBooks);
   //Navigate Hook
   const navigate = useNavigate();
 
@@ -65,7 +66,13 @@ const Home = () => {
       <h1 className=" text-center text-muted text-capitalize mt-5 ">
         Catalogue
       </h1>
-      <div className="row container mx-auto">{eachBook}</div>
+      <div>
+        {loading ? (
+          <Loading></Loading>
+        ) : (
+          <div className="row container mx-auto">{eachBook}</div>
+        )}
+      </div>
       <div>
         <button
           onClick={handleManageInventory}

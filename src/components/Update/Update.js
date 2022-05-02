@@ -146,6 +146,7 @@ const Update = () => {
         toast.success("Stock Updated Successfully");
       });
   };
+  console.log(bookQuantity);
 
   //Click Handler Function to Deliver a book
   const handleDeliver = () => {
@@ -280,7 +281,7 @@ const Update = () => {
                 {chosenBook?.description.slice(0, 500)}...
               </p>
               <h6 className="card-text">
-                Available Pieces:{" "}
+                Available Pieces:
                 {bookQuantity ? bookQuantity : chosenBook?.quantity}
               </h6>
             </div>
