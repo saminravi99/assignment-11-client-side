@@ -19,6 +19,7 @@ import AboutUs from "../AboutUs/AboutUs";
 import auth from "../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import useToken from "../hooks/useToken";
+import ManageInventory from "../ManageInventory/ManageInventory";
 
 export const AllContext = createContext();
 
@@ -72,6 +73,14 @@ function App() {
             element={
               <RequireAuth>
                 <Update></Update>
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="manage-inventory"
+            element={
+              <RequireAuth>
+                <ManageInventory></ManageInventory>
               </RequireAuth>
             }
           ></Route>

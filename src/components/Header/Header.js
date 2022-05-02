@@ -37,7 +37,8 @@ const Header = () => {
         pathname === "/my-items" ||
         pathname === "/add-items" ||
         pathname === "/inventory" ||
-        pathname === "/about-us"
+        pathname === "/about-us" ||
+        pathname === "/manage-inventory"
           ? `d-block`
           : `d-none`
       }
@@ -57,6 +58,8 @@ const Header = () => {
             : pathname.includes("blogs")
             ? `header-section`
             : pathname.includes("about-us")
+            ? `header-section`
+            : pathname.includes("manage-inventory")
             ? `header-section`
             : `header-section header-section-height`
         }
@@ -140,7 +143,10 @@ const Header = () => {
                         onClick={handleSignOut}
                       >
                         Sign Out
-                        <FontAwesomeIcon className="ms-2" icon={faRightFromBracket} />
+                        <FontAwesomeIcon
+                          className="ms-2"
+                          icon={faRightFromBracket}
+                        />
                       </button>
                     </span>
                   ) : (
@@ -169,6 +175,8 @@ const Header = () => {
               ? "d-none"
               : pathname.includes("about-us")
               ? "d-none"
+              : pathname.includes("manage-inventory")
+              ? "d-none"
               : `hero-container`
           }
         >
@@ -189,6 +197,8 @@ const Header = () => {
               : pathname.includes("blogs")
               ? `d-none`
               : pathname.includes("about-us")
+              ? `d-none`
+              : pathname.includes("manage-inventory")
               ? `d-none`
               : `header-img`
           }

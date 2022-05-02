@@ -245,8 +245,8 @@ const Update = () => {
     console.log(updateStock);
   }, [updateStock, chosenBook?.quantity]);
 
-  const handleGoBackToInventory = () => {
-    navigate("/inventory");
+  const handleManageInventory = () => {
+    navigate("/manage-inventory");
   }
 
   return (
@@ -364,7 +364,7 @@ const Update = () => {
 
       <div className="my-5">
         <button
-          onClick={handleGoBackToInventory}
+          onClick={handleManageInventory}
           className="btn btn-secondary d-block mx-auto px-5"
         >
           Manage Inventory

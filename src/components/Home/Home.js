@@ -17,8 +17,8 @@ const Home = () => {
   const slicedBooks = books.slice(0, 6);
 
   //Function to navigate to the inventory page
-  const handleInventory = () => {
-    navigate("/inventory");
+  const handleManageInventory = () => {
+    navigate("/manage-inventory");
   };
 
   //Function to update the stock of the items of the inventory
@@ -68,7 +68,7 @@ const Home = () => {
       <div className="row container mx-auto">{eachBook}</div>
       <div>
         <button
-          onClick={handleInventory}
+          onClick={handleManageInventory}
           className="btn btn-primary d-block mx-auto px-5 py-2 my-4"
         >
           Manage Inventories

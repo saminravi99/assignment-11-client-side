@@ -1,18 +1,21 @@
 import {
   faFileCirclePlus,
   faFilePen,
+  faTableCells,
+  faTableList,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
 import useBooks from "../hooks/useBooks";
 import Loading from "../Loading/Loading";
-import "./Inventory.css";
+import "./ManageInventory.css";
 
-const Inventory = () => {
+const ManageInventory = () => {
   //Custom Hook For Fetching All Books From The Server API
   const [books, setBooks, isLoading] = useBooks();
   const [userAddedBooks, setUserAddedBooks] = useState([]);
@@ -136,26 +139,118 @@ const Inventory = () => {
     );
   });
 
+  const [showTabular, setShowTabular] = useState(true);
+
+  const handleChangeToTabular = () => {
+    setShowTabular(!showTabular);
+  };
+
+  const bookTable = books.map((book) => {
+    return (
+      <tr key={book._id}>
+        <td className="text-center">{book._id}</td>
+        <td className="text-center">{book.bookName}</td>
+        <td className="text-center">{book.author}</td>
+        <td className="text-center">{book.quantity}</td>
+        <td className="text-center">{book.price}</td>
+        <td>
+          <button
+            onClick={() => handleUpdateStock(book._id)}
+            className="btn btn-primary d-block mx-auto"
+          >
+            Update Stock
+            {/* <FontAwesomeIcon className="ms-2" icon={faFilePen} /> */}
+          </button>
+        </td>
+        <td>
+          <button
+            onClick={() => handleDeleteBook(book._id, book.bookName)}
+            className="btn btn-danger d-block mx-auto"
+          >
+            Delete
+            {/* <FontAwesomeIcon className="ms-2" icon={faTrashCan} /> */}
+          </button>
+        </td>
+      </tr>
+    );
+  });
+
   return (
     <div className="padding-nav">
-      {isLoading ? (
-        <Loading></Loading>
-      ) : (
-        <div>
-          <div className="row container mx-auto">{book}</div>
+      <div>
+        <button
+          onClick={handleChangeToTabular}
+          className="btn btn-success d-block mx-auto"
+        >
+          {!showTabular ? (
+            <span>
+              See In Tabular Format
+              <FontAwesomeIcon className="ms-2" icon={faTableList} />
+            </span>
+          ) : (
+            <span>
+              See In Grid Card Format
+              <FontAwesomeIcon className="ms-2" icon={faTableCells} />
+            </span>
+          )}
+        </button>
+      </div>
+      <div>
+        {showTabular ? (
           <div>
-            <button
-              onClick={handleAddNewItem}
-              className="btn btn-primary d-block mx-auto px-5 py-2 my-4"
-            >
-              Add New Item
-              <FontAwesomeIcon className="ms-2" icon={faFileCirclePlus} />
-            </button>
+            {isLoading ? (
+              <Loading></Loading>
+            ) : (
+              <div className="container mx-auto my-5 table-responsive">
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th className="text-center">ID</th>
+                      <th className="text-center">Book Name</th>
+                      <th className="text-center">Author</th>
+                      <th className="text-center">Available Pieces</th>
+                      <th className="text-center">Price</th>
+                      <th className="text-center">Update Stock</th>
+                      <th className="text-center">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>{bookTable}</tbody>
+                </Table>
+                <div>
+                  <button
+                    onClick={handleAddNewItem}
+                    className="btn btn-primary d-block mx-auto px-5 py-2 my-4"
+                  >
+                    Add New Item
+                    <FontAwesomeIcon className="ms-2" icon={faFileCirclePlus} />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      )}
+        ) : (
+          <div>
+            {isLoading ? (
+              <Loading></Loading>
+            ) : (
+              <div>
+                <div className="row container mx-auto">{book}</div>
+                <div>
+                  <button
+                    onClick={handleAddNewItem}
+                    className="btn btn-primary d-block mx-auto px-5 py-2 my-4"
+                  >
+                    Add New Item
+                    <FontAwesomeIcon className="ms-2" icon={faFileCirclePlus} />
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-export default Inventory;
+export default ManageInventory;
